@@ -83,16 +83,12 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="row">
-                <div class="col-xs-12">
-                    <h5 class="text-center">Arcs</h4>
-                    Saga: {{character.arcs['saga']}}<br>
-                    Epic: {{character.arcs['epic']}}<br>
-                    Belief: {{character.arcs['belief']}}<br>
-                    Glory: {{character.arcs['glory']}}<br>
-                    Flaw: {{character.arcs['flaw']}}<br>
-                </div>
-            </div>
+            <h5 class="text-center">Arcs</h4>
+            Saga: {{character.arcs['saga']}}<br>
+            Epic: {{character.arcs['epic']}}<br>
+            Belief: {{character.arcs['belief']}}<br>
+            Glory: {{character.arcs['glory']}}<br>
+            Flaw: {{character.arcs['flaw']}}<br>
         </div>
         <div class="col-sm-6">
             <h4 class="text-center">Character Bio</h4>
@@ -101,35 +97,104 @@
     <div class="row">
         <div class="col-sm-6">
             <h4 class="text-center">Attributes</h4>
-            STR: {{}} AGI: {{}}<br>
-            END: {{}} HLT: {{}}<br>
-            WIL: {{}} WIT: {{}}<br>
-            INT: {{}} PER: {{}}<br>
-            TOU: {{}} LUK: {{}}<br>
+            STR: {{character.attributes['STR']}} 
+            AGI: {{character.attributes['AGI']}}<br>
+            END: {{character.attributes['END']}} 
+            HLT: {{character.attributes['HLT']}}<br>
+            WIL: {{character.attributes['WIL']}} 
+            WIT: {{character.attributes['WIT']}}<br>
+            INT: {{character.attributes['INT']}} 
+            PER: {{character.attributes['PER']}}<br>
+            TOU: {{character.attributes['TOU']}} 
+            LUK: {{character.attributes['LUK']}}<br>
         </div>
         <div class="col-sm-6">
             <h4 class="text-center">Compound Attributes</h4>
-            ADR: {{}}<br>
-            MOB: {{}}<br>
-            CAR: {{}}<br>
-            CHA: {{}}<br>
-            GRT: {{}}<br>
+            ADR: {{character.attributes['ADR']}}<br>
+            MOB: {{character.attributes['MOB']}}<br>
+            CAR: {{character.attributes['CAR']}}<br>
+            CHA: {{character.attributes['CHA']}}<br>
+            GRIT: {{character.attributes['GRIT']}}<br>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
             <h4 class="text-center">Skills</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Skill Name</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for skill in character.skills %}
+                        <tr>
+                            <td>{{skill[0]}}</td>
+                            <td>{{skill[1]}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         <div class="col-sm-6">
-            <h4 class="text-center">Boons&amp;Banes</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h5 class="text-center">Boons</h5>
+                </div>
+                <ul class="list-group">
+                    {% for boon in character.boons %}
+                        <li class="list-group-item">{{boon}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h5 class="text-center">Banes</h5>
+                </div>
+                <ul class="list-group">
+                    {% for bane in character.banes %}
+                        <li class="list-group-item">{{bane}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
             <h4 class="text-center">Combat</h4>
+            Combat Pool: {{character.cp}}<br>
+            Missile Pool: {{character.mp}}<br>
+            {% if character.school != None %}
+                {{character.school[0]}} {{character.school[1]}}<br>
+            {% if character.profs %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Proficiency</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in character.profs %}
+                            <tr>
+                                <td>{{p[0]}}</td>
+                                <td>{{p[1]}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
         </div>
         <div class="col-sm-6">
             <h4 class="text-center">Talents</h4>
+            {% if character.talents %}
+                <ul>
+                    {% for tal in character.talents %}
+                        <li>{{tal}}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     </div>
     <div class="row">
