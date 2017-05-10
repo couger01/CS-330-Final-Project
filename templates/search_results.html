@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbar-to-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="/">Home <span class="sr-only">(current)</span></a>
+                    <a href="/">Home</a>
                 </li>
                 <li class="active">
                     <a href="/creator">Creator</a>
@@ -39,8 +39,10 @@
             </form>
             {% if user.logged_in %}
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><p>Logged in as
-                    <a href="{{user.settings_url}}">{{ user.name }}</a></p>
+                <li class="active">
+                    <a href="settings/{{user.name}}">
+                        Logged in as {{ user.name }}
+                    </a>
                 </li>
                 <li class="active"><a href="/logout">Logout</a></li>
             </ul>
@@ -63,14 +65,19 @@
     <tbody>
         {% for res in results %}
         <tr>
-            <td><a href="/view/{{ res[0] }}">{{ res[0] }}</a></td>
+            <td>{{ res[0] }}</td>
             <td>{{ res[1]}}</td>
-            <td>{{ res[2] }}</td>
+            <td>
+            <a href="/view/{{ res[0] }}">{{ res[2] }}</a></td>
             <td>
                 {% if res[1] == user.name and user.name != "Anonymous" %}
-                    <button class="btn btn-default">Modify</button>
+                    <a class="btn btn-default" href="/modify/{{res[0]}}">
+                        Modify
+                    </a>
                 {% elif user.name != "Anonymous" %}
-                    <button class="btn btn-default">Copy &amp; Modify</button>
+                    <a class="btn btn-default" href="/copy/{{res[0]}}">
+                        Copy &amp; Modify
+                    </a>
                 {% else %}
                     <p>Sign in to copy or modify existing characters</p>
                 {% endif %}
