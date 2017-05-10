@@ -39,8 +39,10 @@
             </form>
             {% if user.logged_in %}
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><p>Logged in as
-                    <a href="{{user.settings_url}}">{{ user.name }}</a></p>
+                <li class="active">
+                    <a href="settings/{{user.name}}">
+                        Logged in as {{ user.name }}
+                    </a>
                 </li>
                 <li class="active"><a href="/logout">Logout</a></li>
             </ul>
@@ -126,41 +128,26 @@
                         <button type="submit" class="btn btn-default">
                             Login
                         </button>
+                        --or--
+                        <a href="/sign-up" class="btn btn-default">
+                            Create Account
+                        </a>
                     </form>
                 </div>
             </div>
             {% endif %}
-            <h2 class="text-center">News and Updates</h2>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Vivamus eu odio sit amet nibh consequat
-                        consequat. Etiam et lectus nibh. Fusce quis placerat
-                        libero. Aliquam interdum mattis ipsum id dictum. Donec
-                        consequat scelerisque risus vel consequat. Integer eget
-                        libero eleifend mauris imperdiet vehicula eu sit amet
-                        erat. Aenean mauris lacus, dignissim sit amet metus
-                        eget, pharetra semper purus. Donec quis viverra nulla.
-                        Fusce nec urna neque. Fusce tincidunt dolor eget libero
-                        mattis consectetur.
-                    </p>
-                </li>
-                <li class="list-group-item">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Vivamus eu odio sit amet nibh consequat
-                        consequat. Etiam et lectus nibh. Fusce quis placerat
-                        libero. Aliquam interdum mattis ipsum id dictum. Donec
-                        consequat scelerisque risus vel consequat. Integer eget
-                        libero eleifend mauris imperdiet vehicula eu sit amet
-                        erat. Aenean mauris lacus, dignissim sit amet metus
-                        eget, pharetra semper purus. Donec quis viverra nulla.
-                        Fusce nec urna neque. Fusce tincidunt dolor eget libero
-                        mattis consectetur.
-                    </p>
-                </li>
-            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="text-center">News &amp; Updates</h2>
+                </div>
+                <ul class="list-group">
+                    {% for post in updates %}
+                    <li class="list-group-item"><p>
+                        {{post}}
+                    </p></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>
