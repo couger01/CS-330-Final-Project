@@ -1,0 +1,154 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+    Placeholder
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+            data-toggle="collapse" data-targets="#navbar-to-collapse"
+            aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Char Builder</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-to-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="active">
+                    <a href="/creator">Creator</a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" action="/search">
+                <div class="form-group">
+                    <label for="charSearch" class="sr-only">
+                        Search Characters
+                    </label>
+                    <input type="text" class="form-control" name="q"
+                    id="charSearch" placeholder="Search Characters">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            {% if user.logged_in %}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <a href="settings/{{user.name}}">
+                        Logged in as {{ user.name }}
+                    </a>
+                </li>
+                <li class="active"><a href="/logout">Logout</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 class="text-center">Instructions</h2>
+            <p>
+                Many, many words about using our tool. Those words can come
+                later though. Right now, it would be a good time for some
+                greeking, even though it uses psuedo-latin. Why does anyone
+                take computer scientists seriously again?
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus eu odio sit amet nibh consequat consequat. Etiam et
+                lectus nibh. Fusce quis placerat libero. Aliquam interdum
+                mattis ipsum id dictum. Donec consequat scelerisque risus vel
+                consequat. Integer eget libero eleifend mauris imperdiet
+                vehicula eu sit amet erat. Aenean mauris lacus, dignissim sit
+                amet metus eget, pharetra semper purus. Donec quis viverra
+                nulla. Fusce nec urna neque. Fusce tincidunt dolor eget libero
+                mattis consectetur.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus eu odio sit amet nibh consequat consequat. Etiam et
+                lectus nibh. Fusce quis placerat libero. Aliquam interdum
+                mattis ipsum id dictum. Donec consequat scelerisque risus vel
+                consequat. Integer eget libero eleifend mauris imperdiet
+                vehicula eu sit amet erat. Aenean mauris lacus, dignissim sit
+                amet metus eget, pharetra semper purus. Donec quis viverra
+                nulla. Fusce nec urna neque. Fusce tincidunt dolor eget libero
+                mattis consectetur.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus eu odio sit amet nibh consequat consequat. Etiam et
+                lectus nibh. Fusce quis placerat libero. Aliquam interdum
+                mattis ipsum id dictum. Donec consequat scelerisque risus vel
+                consequat. Integer eget libero eleifend mauris imperdiet
+                vehicula eu sit amet erat. Aenean mauris lacus, dignissim sit
+                amet metus eget, pharetra semper purus. Donec quis viverra
+                nulla. Fusce nec urna neque. Fusce tincidunt dolor eget libero
+                mattis consectetur.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus eu odio sit amet nibh consequat consequat. Etiam et
+                lectus nibh. Fusce quis placerat libero. Aliquam interdum
+                mattis ipsum id dictum. Donec consequat scelerisque risus vel
+                consequat. Integer eget libero eleifend mauris imperdiet
+                vehicula eu sit amet erat. Aenean mauris lacus, dignissim sit
+                amet metus eget, pharetra semper purus. Donec quis viverra
+                nulla. Fusce nec urna neque. Fusce tincidunt dolor eget libero
+                mattis consectetur.
+            </p>
+        </div>
+        <div class="col-sm-6">
+            {% if not user.logged_in %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputUsername">Username</label>
+                            <input type="text" name="loginUsername"
+                            class="form-control" id="inputUsername"
+                            placeholder="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="text" name="loginPassword"
+                            class="form-control" id="inputPassword"
+                            placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-default">
+                            Login
+                        </button>
+                        --or--
+                        <a href="/sign-up" class="btn btn-default">
+                            Create Account
+                        </a>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="text-center">News &amp; Updates</h2>
+                </div>
+                <ul class="list-group">
+                    {% for post in updates %}
+                    <li class="list-group-item"><p>
+                        {{post}}
+                    </p></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
