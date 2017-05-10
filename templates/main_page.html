@@ -37,11 +37,11 @@
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
-            {% if user.logged_in %}
+            {% if user['logged_in'] %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
                     <a href="settings/{{user.name}}">
-                        Logged in as {{ user.name }}
+                        Logged in as {{ user['name'] }}
                     </a>
                 </li>
                 <li class="active"><a href="/logout">Logout</a></li>
@@ -109,32 +109,32 @@
             </p>
         </div>
         <div class="col-sm-6">
-            {% if not user.logged_in %}
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="inputUsername">Username</label>
-                            <input type="text" name="loginUsername"
-                            class="form-control" id="inputUsername"
-                            placeholder="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="text" name="loginPassword"
-                            class="form-control" id="inputPassword"
-                            placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-default">
-                            Login
-                        </button>
-                        --or--
-                        <a href="/sign-up" class="btn btn-default">
-                            Create Account
-                        </a>
-                    </form>
+            {% if not user['logged_in'] %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="inputUsername">Username</label>
+                                <input type="text" name="loginUsername"
+                                class="form-control" id="inputUsername"
+                                placeholder="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword">Password</label>
+                                <input type="text" name="loginPassword"
+                                class="form-control" id="inputPassword"
+                                placeholder="Password">
+                            </div>
+                            <button type="submit" class="btn btn-default">
+                                Login
+                            </button>
+                            --or--
+                            <a href="/sign-up" class="btn btn-default">
+                                Create Account
+                            </a>
+                        </form>
+                    </div>
                 </div>
-            </div>
             {% endif %}
             <div class="panel panel-default">
                 <div class="panel-body">
