@@ -175,88 +175,57 @@ Build
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-heading">
                         <h5 class="text-center">Boons</h5>
                     </div>
-                    <ul class="list-group">
-                        {% for boon in character['boons'] %}
-                        <li class="list-group-item">{{boon}}</li>
-                        {% endfor %}
-                    </ul>
+                    <div class="panel-body">
+                        {{form.boon_1_name()}}<br>
+                        {{form.boon_2_name()}}<br>
+                        {{form.boon_3_name()}}<br>
+                        {{form.boon_4_name()}}<br>
+                        {{form.boon_5_name()}}<br>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-heading">
                         <h5 class="text-center">Banes</h5>
                     </div>
-                    <ul class="list-group">
-                        {% for bane in character['banes'] %}
-                        <li class="list-group-item">{{bane}}</li>
-                        {% endfor %}
-                    </ul>
+                    <div class="panel-body">
+                        {{form.bane_1_name()}}<br>
+                        {{form.bane_2_name()}}<br>
+                        {{form.bane_3_name()}}<br>
+                        {{form.bane_4_name()}}<br>
+                        {{form.bane_5_name()}}<br>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-heading">
                         <h4 class="text-center">Combat</h4>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Combat Pool</th>
-                                    <th>Missile Pool</th>
-                                    {% if character['school'] != None %}
-                                    <th>School</th>
-                                    <th>Level</th>
-                                    {% endif %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{character['cp']}}</td>
-                                    <td>{{character['mp']}}</td>
-                                    {% if character['school'] != None %}
-                                    <td>{{character['school'][0]}}</td>
-                                    <td>{{character['school'][1]}}</td>
-                                    {% endif %}
-                                </tr>
-                            </tbody>
-                        </table>
-                        {% if character['profs'] %}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Proficiency</th>
-                                    <th>Level</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for p in character['profs'] %}
-                                <tr>
-                                    <td>{{p[0]}}</td>
-                                    <td>{{p[1]}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
+                    <div class="panel-body">
+                        School: {{form.school()}} {{form.school_lvl()}}<br><br>
+                        {{form.proficiency_1()}}
+                        {{form.proficiency_2()}}
+                        {{form.proficiency_3()}}
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-heading">
                         <h4 class="text-center">Talents</h4>
-                        {% if character['talents'] %}
-                        <ul class="list-group">
-                            {% for tal in character['talents'] %}
-                            <li class="list-group-item">{{tal}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
+                    </div>
+                    <div class="panel-body">
+                        {{form.talent_1()}}
+                        {{form.talent_2()}}
+                        {{form.talent_3()}}
+                        {{form.talent_4()}}
+                        {{form.talent_5()}}
                     </div>
                 </div>
             </div>
@@ -264,75 +233,36 @@ Build
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-heading">
                         <h4 class="text-center">Weapons</h4>
-                        {% if character['weapons'] %}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Reach</th>
-                                    <th>Swing</th>
-                                    <th>Thrust</th>
-                                    <th>Defense</th>
-                                    <th>Qualities</th>
-                                    <th>Weight</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for wep in character['weapons'] %}
-                                <tr>
-                                    <td>{{wep[0]}}</td>
-                                    <td>{{wep[1]}}</td>
-                                    <td>{{wep[2]}}</td>
-                                    <td>{{wep[3]}}</td>
-                                    <td>{{wep[4]}}</td>
-                                    <td>{{wep[5]}}</td>
-                                    <td>{{wep[6]}}</td>
-                                    <td>{{wep[7]}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
+                    </div>
+                    <div class="panel-body">
+                        Weapon 1: {{form.wep_1_name()}}<br>
+                        Weapon 2: {{form.wep_2_name()}}<br>
+                        Weapon 3: {{form.wep_3_name()}}<br>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-heading">
                         <h4 class="text-center">Armour</h4>
-                        {% if character['armors'] %}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Armour</th>
-                                    <th>AVC</th>
-                                    <th>AVP</th>
-                                    <th>AVB</th>
-                                    <th>Locations</th>
-                                    <th>Weight</th>
-                                    <th>Qualities</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for arm in character['armors'] %}
-                                <tr>
-                                    <td>{{arm[0]}}</td>
-                                    <td>{{arm[1]}}</td>
-                                    <td>{{arm[2]}}</td>
-                                    <td>{{arm[3]}}</td>
-                                    <td>{{arm[4]}}</td>
-                                    <td>{{arm[5]}}</td>
-                                    <td>{{arm[6]}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
+                    </div>
+                    <div class="panel-body">
+                        Armor 1: {{form.armor_1_name()}}<br>
+                        Armor 2: {{form.armor_2_name()}}<br>
+                        Armor 3: {{form.armor_3_name()}}<br>
+                        Armor 4: {{form.armor_4_name()}}<br>
+                        Armor 5: {{form.armor_5_name()}}<br>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <button type="Submit" class="btn btn-default">
+                    Save Character
+                </button>
             </div>
         </div>
     </form>
