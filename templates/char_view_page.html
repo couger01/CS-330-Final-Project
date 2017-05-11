@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbar-to-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="/">Home <span class="sr-only">(current)</span></a>
+                    <a href="/main-page">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="active">
                     <a href="/creator">Build</a>
@@ -37,11 +37,11 @@
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
-            {% if user['logged_in'] %}
+            {% if user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
-                    <a href="settings/{{user['name']}}">
-                        Logged in as {{ user['name'] }}
+                    <a href="settings/{{user.email}}">
+                        Logged in as {{ user.email }}
                     </a>
                 </li>
                 <li class="active"><a href="/logout">Logout</a></li>
@@ -98,15 +98,15 @@
     <div class="row">
         <div class="col-sm-6">
             <h4 class="text-center">Attributes</h4>
-            STR: {{character['attributes']['STR']}} 
+            STR: {{character['attributes']['STR']}}
             AGI: {{character['attributes']['AGI']}}<br>
-            END: {{character['attributes']['END']}} 
+            END: {{character['attributes']['END']}}
             HLT: {{character['attributes']['HLT']}}<br>
-            WIL: {{character['attributes']['WIL']}} 
+            WIL: {{character['attributes']['WIL']}}
             WIT: {{character['attributes']['WIT']}}<br>
-            INT: {{character['attributes']['INT']}} 
+            INT: {{character['attributes']['INT']}}
             PER: {{character['attributes']['PER']}}<br>
-            TOU: {{character['attributes']['TOU']}} 
+            TOU: {{character['attributes']['TOU']}}
             LUK: {{character['attributes']['LUK']}}<br>
         </div>
         <div class="col-sm-6">

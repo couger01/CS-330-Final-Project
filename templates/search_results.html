@@ -21,7 +21,7 @@ Search Results
         <div class="collapse navbar-collapse" id="navbar-to-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="/">Home</a>
+                    <a href="/main-page">Home</a>
                 </li>
                 <li class="active">
                     <a href="/creator">Build</a>
@@ -53,27 +53,15 @@ Search Results
 {% endblock %}
 
 {% block content %}
-{% if not user['logged_in'] %}
+{% if not user.is_authenticated %}
 <div class="panel panel-default">
     <div class="panel-body">
         <form>
-            <div class="form-group">
-                <label for="inputUsername">Username</label>
-                <input type="text" name="loginUsername"
-                class="form-control" id="inputUsername"
-                placeholder="username">
-            </div>
-            <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <input type="text" name="loginPassword"
-                class="form-control" id="inputPassword"
-                placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-default">
+            <a href="/login" class="btn btn-default">
                 Login
-            </button>
+            </a>
             --or--
-            <a href="/sign-up" class="btn btn-default">
+            <a href="/register" class="btn btn-default">
                 Create Account
             </a>
         </form>
