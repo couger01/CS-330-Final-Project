@@ -43,11 +43,53 @@ class User(db.Model, UserMixin):
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+    characters = db.relationship("Characters")
     def __init__(self, email, password, active, roles):
         self.email = email
         self.password = password
         self.active = active
         self.roles = roles
+
+class Characters(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.String(255))
+    age = db.Column(db.Integer)
+    race = db.Column(db.String(255))
+    owner = db.Column(db.String(255))
+    social_class = db.Column(db.String(255))
+    bio = db.Column(db.String(255))
+    cp = db.Column(db.Integer)
+    mp = db.Column(db.Integer)
+    
+    misc = db.relationship("Misc_char")
+    weapon = db.relationship("Weapon_char")
+    armour = db.relationship("Armour_char")
+
+class Misc_char(db.Model):
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+    misc_id = db.Column(db.Integer, db.ForeignKey('misc_equipment.id'))
+
+class Misc_equipment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    miscChar = db.relationship("Misc_char")
+
+class Weapon_char(db.Model):
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+    misc_id = db.Column(db.Integer, db.ForeignKey('weapons.id'))
+
+class Weapons(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    miscChar = db.relationship("Weapon_char")
+
+class Armour_char(db.Model):
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+    misc_id = db.Column(db.Integer, db.ForeignKey('Armour.id'))
+
+class Armour(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    miscChar = db.relationship("Armour_char")
+
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
