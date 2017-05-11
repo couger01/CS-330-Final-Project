@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-    Placeholder
+Placeholder
 {% endblock %}
 
 {% block navbar %}
@@ -24,7 +24,7 @@
                     <a href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="active">
-                    <a href="/creator">Creator</a>
+                    <a href="/creator">Build</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-left" action="/search">
@@ -130,9 +130,11 @@
                 </div>
                 <ul class="list-group">
                     {% for post in updates %}
-                    <li class="list-group-item"><p>
+                    <li class="list-group-item">
+                        <p>
                         {{post}}
-                    </p></li>
+                        </p>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>

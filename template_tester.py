@@ -6,15 +6,9 @@ app = Flask(__name__)
 Bootstrap(app)
 
 
-class User:
-    def __init__(self, name="Anonymous", logged_in=False):
-        self.name = name
-        self.logged_in = logged_in
-
-
 @app.route("/")
 def main_page():
-    u = User(logged_in=True)
+    u = {'logged_in': False, 'name': 'Anonymous'}
     upstr = """
             Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Vivamus eu odio sit amet nibh consequat
@@ -33,7 +27,7 @@ def main_page():
 
 @app.route("/search")
 def results_page():
-    u = User(name="Ashleigh", logged_in=True)
+    u = {'logged_in': False, 'name': 'Ashleigh'}
     res = [[3, "Ashleigh", "Adelaide the Mercenary"],
            [1, "Eric", "Phillip the Bastard"],
            [5, "Ashleigh", "Anna the Knight"],
