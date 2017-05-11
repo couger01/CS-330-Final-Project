@@ -85,9 +85,15 @@ class Characters(db.Model):
     misc = db.relationship("Misc_char")
     weapon = db.relationship("Weapon_char")
     armour = db.relationship("Armour_char")
+    boons = db.relationship("Boons")
+    banes = db.relationship("Banes")
+    skills = db.relationship("Skills")
+    school = db.relationship("School")
+    profs = db.relationship("Profs")
 
 class Misc_char(db.Model):
     __tablename__ = 'misc_char'
+    id = db.Column(db.Integer, primary_key=True)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
     misc_id = db.Column(db.Integer, db.ForeignKey('misc_equipment.id'))
 
@@ -98,6 +104,7 @@ class Misc_equipment(db.Model):
 
 class Weapon_char(db.Model):
     __tablename__ = 'weapon_char'
+    id = db.Column(db.Integer, primary_key=True)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
     misc_id = db.Column(db.Integer, db.ForeignKey('weapons.id'))
 
@@ -106,15 +113,60 @@ class Weapons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     miscChar = db.relationship("Weapon_char")
 
-class Armour_char(db.Model):
-    __tablename__ = 'armour_char'
-    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
-    misc_id = db.Column(db.Integer, db.ForeignKey('Armour.id'))
-
 class Armour(db.Model):
     __tablename__ = 'armour'
     id = db.Column(db.Integer, primary_key=True)
     miscChar = db.relationship("Armour_char")
+
+class Armour_char(db.Model):
+    __tablename__ = 'armour_char'
+    id = db.Column(db.Integer, primary_key=True)
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+    misc_id = db.Column(db.Integer, db.ForeignKey('armour.id'))
+
+class Boons(db.Model):
+    __tablename__ = 'boons'
+    id = db.column(db.Integer, primary_key=True)
+    boon_1 = db.Column(db.String(255))
+    boon_2 = db.Column(db.String(255))
+    boon_3 = db.Column(db.String(255))
+    boon_4 = db.Column(db.String(255))
+    boon_5 = db.Column(db.String(255))
+    boon_6 = db.Column(db.String(255))
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+class Banes(db.Model):
+    __tablename__ = 'banes'
+    id = db.column(db.Integer, primary_key=True)
+    bane_1 = db.Column(db.String(255))
+    bane_2 = db.Column(db.String(255))
+    bane_3 = db.Column(db.String(255))
+    bane_4 = db.Column(db.String(255))
+    bane_5 = db.Column(db.String(255))
+    bane_6 = db.Column(db.String(255))
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+class Skills(db.Model):
+    __tablename__ = 'skills'
+    id = db.column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    level = db.Column(db.Integer)
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+class School(db.Model):
+    __tablename__ = 'school'
+    id = db.column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    level = db.Column(db.Integer)
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+class Profs(db.Model):
+    __tablename__ = 'profs'
+    id = db.column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    level = db.Column(db.Integer)
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
