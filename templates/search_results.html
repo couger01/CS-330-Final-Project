@@ -21,7 +21,7 @@ Search Results
         <div class="collapse navbar-collapse" id="navbar-to-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="/">Home</a>
+                    <a href="/main-page">Home</a>
                 </li>
                 <li class="active">
                     <a href="/creator">Build</a>
@@ -85,7 +85,6 @@ Search Results
             <td>
             <a href="/view/{{ res[0] }}">{{ res[2] }}</a></td>
             <td>
-<<<<<<< HEAD
                 {% if res[1] == user.email and user.is_authenticated %}
                     <a class="btn btn-default" href="/modify/{{res[0]}}">
                         Modify
@@ -96,18 +95,6 @@ Search Results
                     </a>
                 {% elif user.is_anonymous %}
                     <p><a href="/login">Sign in</a> to copy or modify existing characters</p>
-=======
-                {% if res[1] == user.email and user.email != "Anonymous" %}
-                <a class="btn btn-default" href="/modify/{{res[0]}}">
-                    Modify
-                </a>
-                {% elif user.email != "Anonymous" %}
-                <a class="btn btn-default" href="/copy/{{res[0]}}">
-                    Copy &amp; Modify
-                </a>
-                {% else %}
-                <p>Sign in to copy or modify existing characters</p>
->>>>>>> finished initial debugging of char_view_page template. Tweaked all three currently extant templates to work with flask-security. Added testing route for character view to template tester.py
                 {% endif %}
             </td>
         </tr>
