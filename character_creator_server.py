@@ -166,7 +166,7 @@ class Armour_char(db.Model):
 
 class Boons(db.Model):
     __tablename__ = 'boons'
-    id = db.column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     boon_1 = db.Column(db.String(255))
     boon_2 = db.Column(db.String(255))
     boon_3 = db.Column(db.String(255))
@@ -177,7 +177,7 @@ class Boons(db.Model):
 
 class Banes(db.Model):
     __tablename__ = 'banes'
-    id = db.column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     bane_1 = db.Column(db.String(255))
     bane_2 = db.Column(db.String(255))
     bane_3 = db.Column(db.String(255))
@@ -188,21 +188,21 @@ class Banes(db.Model):
 
 class Skills(db.Model):
     __tablename__ = 'skills'
-    id = db.column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     level = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
 class School(db.Model):
     __tablename__ = 'school'
-    id = db.column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     level = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
 class Profs(db.Model):
     __tablename__ = 'profs'
-    id = db.column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     level = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
