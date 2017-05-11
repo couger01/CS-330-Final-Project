@@ -24,7 +24,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li class="active">
-                    <a href="/creator">Creator</a>
+                    <a href="/creator">Build</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-left" action="/search">
@@ -40,7 +40,7 @@
             {% if user['logged_in'] %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
-                    <a href="settings/{{user.name}}">
+                    <a href="settings/{{user['name']}}">
                         Logged in as {{ user['name']}}
                     </a>
                 </li>
