@@ -1,0 +1,340 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Build
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+            data-toggle="collapse" data-targets="#navbar-to-collapse"
+            aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Char Builder</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-to-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="active">
+                    <a href="/creator">Build</a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" action="/search">
+                <div class="form-group">
+                    <label for="charSearch" class="sr-only">
+                        Search Characters
+                    </label>
+                    <input type="text" class="form-control" name="q"
+                    id="charSearch" placeholder="Search Characters">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <a href="settings/{{user.email}}">
+                        Logged in as {{ user.email }}
+                    </a>
+                </li>
+                <li class="active"><a href="/logout">Logout</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <form method="POST" action="/save">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{form.csrf_token}}
+                        <h4 class="text-center">Details</h4>
+                    </div>
+                    <div class="panel-body">
+                        {{form.name.label}}: {{form.name()}}<br>
+                        {{form.age.label}}: {{form.age()}}<br>
+                        {{form.race()}}<br>
+                        <table class="table text-center">
+                            <caption>PCP Distribution</caption>
+                            <thead>
+                                <tr>
+                                    <th>Total</th>
+                                    <th>Race</th>
+                                    <th>Attributes</th>
+                                    <th>Skills</th>
+                                    <th>Proficiencies</th>
+                                    <th>Social Class/Wealth</th>
+                                    <th>Boons/Banes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{form.pcp_total()}}</td>
+                                    <td>{{form.pcp_race()}}</td>
+                                    <td>{{form.pcp_attr()}}</td>
+                                    <td>{{form.pcp_skills()}}</td>
+                                    <td>{{form.pcp_profs()}}</td>
+                                    <td>{{form.pcp_social()}}</td>
+                                    <td>{{form.pcp_boons_banes()}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Arcs</h4>
+                    </div>
+                    <div class="panel-body">
+                        Saga: {{form.arc_saga()}}<br>
+                        Epic: {{form.arc_epic()}}<br>
+                        Glory: {{form.arc_glory()}}<br>
+                        Belief: {{form.arc_belief()}}<br>
+                        Flaw: {{form.arc_flaw()}}<br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Character Bio</h4>
+                    </div>
+                    <div class="panel-body">
+                        {{form.bio()}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Attributes</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>STR</th>
+                                    <th>AGI</th>
+                                    <th>END</th>
+                                    <th>HLT</th>
+                                    <th>WIL</th>
+                                    <th>WIT</th>
+                                    <th>INT</th>
+                                    <th>PER</th>
+                                    <th>TOU</th>
+                                    <th>LUK</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{form.attr_str()}}</td>
+                                    <td>{{form.attr_agi()}}</td>
+                                    <td>{{form.attr_end()}}</td>
+                                    <td>{{form.attr_hlt()}}</td>
+                                    <td>{{form.attr_wil()}}</td>
+                                    <td>{{form.attr_wit()}}</td>
+                                    <td>{{form.attr_int()}}</td>
+                                    <td>{{form.attr_per()}}</td>
+                                    <td>{{form.attr_tou()}}</td>
+                                    <td>{{form.attr_luk()}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Skills</h4>
+                    </div>
+                    <div class="panel-body">
+                        Skill: {{form.skill_1_name()}} Level: {{form.skill_1_lvl}}<br>
+                        Skill: {{form.skill_2_name()}} Level: {{form.skill_2_lvl}}<br>
+                        Skill: {{form.skill_3_name()}} Level: {{form.skill_3_lvl}}<br>
+                        Skill: {{form.skill_4_name()}} Level: {{form.skill_4_lvl}}<br>
+                        Skill: {{form.skill_5_name()}} Level: {{form.skill_5_lvl}}<br>
+                        Skill: {{form.skill_6_name()}} Level: {{form.skill_6_lvl}}<br>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h5 class="text-center">Boons</h5>
+                    </div>
+                    <ul class="list-group">
+                        {% for boon in character['boons'] %}
+                        <li class="list-group-item">{{boon}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h5 class="text-center">Banes</h5>
+                    </div>
+                    <ul class="list-group">
+                        {% for bane in character['banes'] %}
+                        <li class="list-group-item">{{bane}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4 class="text-center">Combat</h4>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Combat Pool</th>
+                                    <th>Missile Pool</th>
+                                    {% if character['school'] != None %}
+                                    <th>School</th>
+                                    <th>Level</th>
+                                    {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{character['cp']}}</td>
+                                    <td>{{character['mp']}}</td>
+                                    {% if character['school'] != None %}
+                                    <td>{{character['school'][0]}}</td>
+                                    <td>{{character['school'][1]}}</td>
+                                    {% endif %}
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% if character['profs'] %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Proficiency</th>
+                                    <th>Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for p in character['profs'] %}
+                                <tr>
+                                    <td>{{p[0]}}</td>
+                                    <td>{{p[1]}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4 class="text-center">Talents</h4>
+                        {% if character['talents'] %}
+                        <ul class="list-group">
+                            {% for tal in character['talents'] %}
+                            <li class="list-group-item">{{tal}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4 class="text-center">Weapons</h4>
+                        {% if character['weapons'] %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Reach</th>
+                                    <th>Swing</th>
+                                    <th>Thrust</th>
+                                    <th>Defense</th>
+                                    <th>Qualities</th>
+                                    <th>Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for wep in character['weapons'] %}
+                                <tr>
+                                    <td>{{wep[0]}}</td>
+                                    <td>{{wep[1]}}</td>
+                                    <td>{{wep[2]}}</td>
+                                    <td>{{wep[3]}}</td>
+                                    <td>{{wep[4]}}</td>
+                                    <td>{{wep[5]}}</td>
+                                    <td>{{wep[6]}}</td>
+                                    <td>{{wep[7]}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4 class="text-center">Armour</h4>
+                        {% if character['armors'] %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Armour</th>
+                                    <th>AVC</th>
+                                    <th>AVP</th>
+                                    <th>AVB</th>
+                                    <th>Locations</th>
+                                    <th>Weight</th>
+                                    <th>Qualities</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for arm in character['armors'] %}
+                                <tr>
+                                    <td>{{arm[0]}}</td>
+                                    <td>{{arm[1]}}</td>
+                                    <td>{{arm[2]}}</td>
+                                    <td>{{arm[3]}}</td>
+                                    <td>{{arm[4]}}</td>
+                                    <td>{{arm[5]}}</td>
+                                    <td>{{arm[6]}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
