@@ -51,6 +51,7 @@ class User(db.Model, UserMixin):
         self.roles = roles
 
 class Characters(db.Model):
+    __tablename__ = 'characters'
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String(255))
@@ -86,26 +87,32 @@ class Characters(db.Model):
     armour = db.relationship("Armour_char")
 
 class Misc_char(db.Model):
+    __tablename__ = 'misc_char'
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
     misc_id = db.Column(db.Integer, db.ForeignKey('misc_equipment.id'))
 
 class Misc_equipment(db.Model):
+    __tablename__ = 'misc_equipment'
     id = db.Column(db.Integer, primary_key=True)
     miscChar = db.relationship("Misc_char")
 
 class Weapon_char(db.Model):
+    __tablename__ = 'weapon_char'
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
     misc_id = db.Column(db.Integer, db.ForeignKey('weapons.id'))
 
 class Weapons(db.Model):
+    __tablename__ = 'weapons'
     id = db.Column(db.Integer, primary_key=True)
     miscChar = db.relationship("Weapon_char")
 
 class Armour_char(db.Model):
+    __tablename__ = 'armour_char'
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
     misc_id = db.Column(db.Integer, db.ForeignKey('Armour.id'))
 
 class Armour(db.Model):
+    __tablename__ = 'armour'
     id = db.Column(db.Integer, primary_key=True)
     miscChar = db.relationship("Armour_char")
 
