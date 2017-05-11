@@ -56,39 +56,43 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="text-center">Details</h4>
-            Name: {{character['name']}}<br>
-            Age: {{character['age']}}<br>
-            Race: {{character['race']}}<br>
-            Player: {{character['owner']}}<br>
-            Social Class: {{character['social_class']}}<br>
-            <table class="table text-center">
-                <caption>PCP Distribution</caption>
-                <thead>
-                    <tr>
-                        <th>Total</th>
-                        <th>Race</th>
-                        <th>Attributes</th>
-                        <th>Skills</th>
-                        <th>Proficiencies</th>
-                        <th>Social Class/Wealth</th>
-                        <th>Boons/Banes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {% for val in character['pcp_dist'] %}
-                        <td>{{val}}</td>
-                        {% endfor %}
-                    </tr>
-                </tbody>
-            </table>
-            <h5 class="text-center">Arcs</h4>
-            Saga: {{character['arcs']['saga']}}<br>
-            Epic: {{character['arcs']['epic']}}<br>
-            Belief: {{character['arcs']['belief']}}<br>
-            Glory: {{character['arcs']['glory']}}<br>
-            Flaw: {{character['arc']['flaw']}}<br>
+            <div class="panel">
+                <div class="panel-body">
+                    <h4 class="text-center">Details</h4>
+                    Name: {{character['name']}}<br>
+                    Age: {{character['age']}}<br>
+                    Race: {{character['race']}}<br>
+                    Player: {{character['owner']}}<br>
+                    Social Class: {{character['social_class']}}<br>
+                    <table class="table text-center">
+                        <caption>PCP Distribution</caption>
+                        <thead>
+                            <tr>
+                                <th>Total</th>
+                                <th>Race</th>
+                                <th>Attributes</th>
+                                <th>Skills</th>
+                                <th>Proficiencies</th>
+                                <th>Social Class/Wealth</th>
+                                <th>Boons/Banes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% for val in character['pcp_dist'] %}
+                                <td>{{val}}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5 class="text-center">Arcs</h5>
+                    Saga: {{character['arcs']['saga']}}<br>
+                    Epic: {{character['arcs']['epic']}}<br>
+                    Belief: {{character['arcs']['belief']}}<br>
+                    Glory: {{character['arcs']['glory']}}<br>
+                    Flaw: {{character['arcs']['flaw']}}<br>
+                </div>
+            </div>
         </div>
         <div class="col-sm-6">
             <h4 class="text-center">Character Bio</h4>
@@ -170,6 +174,7 @@
             <strong>
                 {{character['school'][0]}} {{character['school'][1]}}<br>
             </strong>
+            {% endif %}
             {% if character['profs'] %}
             <table class="table">
                 <thead>
@@ -236,8 +241,8 @@
         </div>
         <div class="col-sm-6">
             <h4 class="text-center">Armour</h4>
-            {% if armors %}
-            <table>
+            {% if character['armors'] %}
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Armour</th>
@@ -250,7 +255,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for arm in armors %}
+                    {% for arm in character['armors'] %}
                     <tr>
                         <td>{{arm[0]}}</td>
                         <td>{{arm[1]}}</td>

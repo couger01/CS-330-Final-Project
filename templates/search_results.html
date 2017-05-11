@@ -41,7 +41,7 @@ Search Results
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
                     <a href="settings/{{user.email}}">
-                        Logged in as {{ user.email }}
+                        Logged in as {{ user.email}}
                     </a>
                 </li>
                 <li class="active"><a href="/logout">Logout</a></li>
@@ -55,18 +55,18 @@ Search Results
 {% block content %}
 {% if not user.is_authenticated %}
 <div class="panel panel-default">
-    <div class="panel-body">
-        <form>
-            <a href="/login" class="btn btn-default">
-                Login
-            </a>
-            --or--
-            <a href="/register" class="btn btn-default">
-                Create Account
-            </a>
-        </form>
-    </div>
-</div>
+                <div class="panel-body">
+                    <form>
+                        <a href="/login" class="btn btn-default">
+                            Login
+                        </a>
+                        --or--
+                        <a href="/register" class="btn btn-default">
+                            Create Account
+                        </a>
+                    </form>
+                </div>
+            </div>
 {% endif %}
 <table class="table">
     <thead>
