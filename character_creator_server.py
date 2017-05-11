@@ -3,6 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore, \
     UserMixin, RoleMixin, login_required, utils, LoginForm, core
 from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, SelectField, TextAreaField
+from wtforms.validators import
+from wtforms import DataRequired, AnyOf
 import psycopg2
 import os
 
@@ -28,6 +32,42 @@ db = SQLAlchemy(app)
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
         db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
+
+class BuildForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired()])
+    age = IntegerField("Age", validators=[])
+    race = StringField("Race", validators=[DataRequired()])
+    pcp_total = SelectField('PCP total', validators=[DataRequired()],
+                            choices=[(18, '18'), (22, '22'), (26, '26'),
+                                     (30, '34'), (34, '34')])
+    pcp_race = SelectField("Race PCP", validators=[DataRequired()],
+                           choices=[(1, 'Tier 1'), (2, 'Tier 2'), (4, 'Tier 3'),
+                                    (6, 'Tier 4'), (8, 'Tier 5')])
+    pcp_attr = SelectField("Attributes PCP", validators=[DataRequired()],
+                           choices=[(1, '26'), (2, '29'), (3, '32'), (4, '35'),
+                                    (5, '38'), (6, '40'), (7, '42'), (8, '44'),
+                                    (9, '46'), (10, '48')])
+    pcp_skills = SelectField("Skills PCP", validators=[DataRequired()],
+                             choices=[(k+1, str(k*3)) for k in range(10)]
+    pcp_profs = SelectField("Skills PCP", validators=[DataRequired()],
+                            choices=[(k+1, str(k*3)) for k in range(10)])
+    pcp_social = SelectField("Social Class PCP", validators=[DataRequired()],
+                             choices=[(1, 'Slave'), (2, 'Peasant'),
+                                      (3, 'Poor Freeman'), (4, 'High Freeman'),
+                                      (6, 'Minor Noble'), (7, 'Landed Noble'),
+                                      (8, 'High Noble'), (9, 'Royalty'),
+                                      (10, 'High Royalty')])
+    pcp_boons_banes = SelectField("Boons and Banes PCP",
+                                  validators=[DataRequired()],
+                                  choices=[(k+1, str((k-3)*5)) for k in range(10)])
+    arc_saga = StringField('Saga Arc', validators=[])
+    arc_epic = StringField('Sage Arc', validators=[])
+    arc_glory = StringField('Sage Arc', validators=[])
+    arc_belief = StringField('Sage Arc', validators=[])
+    arc_flaw = StringField('Sage Arc', validators=[])
+    bio = TextAreaField("Character Bio", validators=[])
+
+
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
