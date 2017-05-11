@@ -85,11 +85,11 @@ Search Results
             <td>
             <a href="/view/{{ res[0] }}">{{ res[2] }}</a></td>
             <td>
-                {% if res[1] == user.email and user.email != "Anonymous" %}
+                {% if res[1] == user.email and user.email != None %}
                 <a class="btn btn-default" href="/modify/{{res[0]}}">
                     Modify
                 </a>
-                {% elif user.email != "Anonymous" %}
+                {% elif user.email != None %}
                 <a class="btn btn-default" href="/copy/{{res[0]}}">
                     Copy &amp; Modify
                 </a>
