@@ -70,5 +70,4 @@ def results_page():
     return render_template("search_results.html", user=core.current_user, results=res)
 
 if __name__ == '__main__':
-    print(app.config['SECURITY_CONFIRMABLE'])
     app.run(debug=True)
