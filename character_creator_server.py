@@ -21,10 +21,10 @@ app.config['SECURITY_REGISTERABLE'] = True
 app.config['SECURITY_CHANGEABLE'] = True
 app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 app.config['SECURITY_CONFIRMABLE'] = False
-app.config['SECURITY_POST_LOGIN_VIEW'] = '/main-page'
-app.config['SECURITY_POST_LOGOUT_VIEW'] = '/main-page'
-app.config['SECURITY_POST_REGISTER_VIEW'] = '/main-page'
-app.config['SECURITY_POST_CHANGE_VIEW'] = '/main-page'
+app.config['SECURITY_POST_LOGIN_VIEW'] = '/'
+app.config['SECURITY_POST_LOGOUT_VIEW'] = '/'
+app.config['SECURITY_POST_REGISTER_VIEW'] = '/'
+app.config['SECURITY_POST_CHANGE_VIEW'] = '/'
 Bootstrap(app)
 
 db = SQLAlchemy(app)
@@ -167,23 +167,13 @@ class Armour_char(db.Model):
 class Boons(db.Model):
     __tablename__ = 'boons'
     id = db.Column(db.Integer, primary_key=True)
-    boon_1 = db.Column(db.String(255))
-    boon_2 = db.Column(db.String(255))
-    boon_3 = db.Column(db.String(255))
-    boon_4 = db.Column(db.String(255))
-    boon_5 = db.Column(db.String(255))
-    boon_6 = db.Column(db.String(255))
+    name = db.Column(db.String(255))
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
 class Banes(db.Model):
     __tablename__ = 'banes'
     id = db.Column(db.Integer, primary_key=True)
-    bane_1 = db.Column(db.String(255))
-    bane_2 = db.Column(db.String(255))
-    bane_3 = db.Column(db.String(255))
-    bane_4 = db.Column(db.String(255))
-    bane_5 = db.Column(db.String(255))
-    bane_6 = db.Column(db.String(255))
+    name = db.Column(db.String(255))
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
 class Skills(db.Model):
@@ -207,6 +197,12 @@ class Profs(db.Model):
     level = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
+class Talents(db.Model):
+    __tablename__ = 'talents'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
@@ -217,9 +213,32 @@ def create_user():
     db.create_all()
 #     encpassword = utils.encrypt_password('password')
 #     user_datastore.create_user(email='matt@nobien.net', password=encpassword, salt=app.config['SECURITY_PASSWORD_SALT'])
+    # new_character= Characters(user=1,name="Adelaide the Knight",age=28,race='Human',owner="Ashleigh",social_class='Freeman',sage='defeat the dragon king',epic='slay dragons'\
+    # ,belief='dragons are evil',flaw='secretly loves dragons and was pressured into killing them',bio="""A young-ish knight who actually likes dragons
+    # but got forced into fighting them by her family.""",STR=4,AGI=4,END=4,HLT=4,WIL=3,WIT=4,INT=4,PER=4,TOU=4,LUK=3,ADR=4,MOB=6,CAR=8,CHA=5,GRIT=1,\
+    # cp=11,mp=0)
+    # new_character_skill= Skills(name='Athletics',level=6,char=1)
+    # new_character_skill2=Skills(name='Climbing',level=6,char=1)
+    # new_character_boons=Boons(name='Beautiful',char=1)
+    # new_character_boons2=Boons(name='Tall',char=1)
+    # new_character_boons3=Boons(name='Natural Born Killer III',char=1)
+    # new_character_banes=Banes(name='Arrow Magnet',char=1)
+    # new_character_banes2=Banes(name='Honor',char=1)
+    # new_character_school=School(name='Officer',level=7, char=1)
+    # new_character_profs = Profs(name='2H Swords',level=7,char=1)
+    # db.session.add(new_character)
+    # db.session.add(new_character_skill)
+    # db.session.add(new_character_skill2)
+    # db.session.add(new_character_boons)
+    # db.session.add(new_character_boons2)
+    # db.session.add(new_character_boons3)
+    # db.session.add(new_character_banes)
+    # db.session.add(new_character_banes2)
+    # db.session.add(new_character_school)
+    # db.session.add(new_character_profs)
     db.session.commit()
 
-@app.route('/main-page')
+@app.route('/')
 def home():
     return render_template('main_page.html',user=core.current_user)
 
@@ -233,27 +252,52 @@ def results_page():
 
 @app.route("/view")
 def view_page():
-    char = {'name': "Adelaide the Knight", 'age': 28, 'race': 'Human',
-            'owner': 'Ashleigh', 'social_class': 'Freeman'}
+    fc=db.session.query(Characters).filter(Characters.id == 1).first()
+    fc_skills = db.session.query(Skills).filter(Skills.char == fc.id).all()
+    fc_boons = db.session.query(Boons).filter(Boons.char == fc.id).all()
+    fc_banes = db.session.query(Banes).filter(Banes.char == fc.id).all()
+    fc_schools = db.session.query(School).filter(School.char == fc.id).all()
+    fc_profs = db.session.query(Profs).filter(Profs.char == fc.id).all()
+    print(fc_skills[0].name)
+    print(fc.name)
+    char = {'name': fc.name, 'age': fc.age, 'race': fc.race,
+            'owner': fc.owner, 'social_class': fc.social_class}
     p_dist = [26, 1, 5, 5, 6, 4, 5]
     char['pcp_dist'] = p_dist
-    a = {'sage': 'defeat the dragon king', 'epic': 'slay dragons',
-         'belief': 'dragons are evil', 'glory': 'success at killing dragons',
-         'flaw': 'secretly loves dragons and was pressured into killing them'}
+    a = {'sage': fc.sage, 'epic': fc.epic,
+         'belief': fc.belief, 'glory': fc.glory,
+         'flaw': fc.flaw}
     char['arcs'] = a
-    char['bio'] = """A young-ish knight who actually likes dragons but
-                     got forced into fighting them by her family."""
-    attr = {'STR': 4, 'AGI': 4, 'END': 4, 'HLT': 4, 'WIL': 3, 'WIT':4, 'INT':4,
-            'PER': 4, 'TOU': 4, 'LUK': 3, 'ADR': 4, 'MOB': 6, 'CAR': 8,
-            'CHA': 5, 'GRIT': 1}
+    char['bio'] = fc.bio
+    attr = {'STR': fc.STR, 'AGI': fc.AGI, 'END': fc.END, 'HLT': fc.HLT, 'WIL': fc.WIL, 'WIT':fc.WIT, 'INT':fc.INT,
+            'PER': fc.PER, 'TOU': fc.TOU, 'LUK': fc.LUK, 'ADR': fc.ADR, 'MOB': fc.MOB, 'CAR': fc.CAR,
+            'CHA': fc.CHA, 'GRIT': fc.GRIT}
     char['attributes'] = attr
-    char['skills'] = [('Athletics', 6), ('Climbing', 6)]
-    char['boons'] = ['Beautiful', 'Tall', 'Natural Born Killer III']
-    char['banes'] = ['Arrow Magnet', 'Honor']
-    char['school'] = ['Officer', 7]
-    char['cp'] = 11
-    char['mp'] = 0
-    char['profs'] = [('2H Sword', 7)]
+    skills_list = []
+    for skill in fc_skills:
+        st = (skill.name, skill.level)
+        skills_list.append(st)
+    char['skills'] = skills_list
+    boons_list = []
+    for boon in fc_boons:
+        boons_list.append(boon.name)
+    char['boons'] = boons_list
+    banes_list = []
+    for bane in fc_banes:
+        banes_list.append(bane.name)
+    char['banes'] = banes_list
+    schools_list = []
+    for school in fc_schools:
+        schools_list.append(school.name)
+        schools_list.append(school.level)
+    char['school'] = schools_list
+    char['cp'] = fc.cp
+    char['mp'] = fc.mp
+    profs_list = []
+    for prof in fc_profs:
+        pt = (prof.name,prof.level)
+        profs_list.append(pt)
+    char['profs'] = profs_list
     char['talents'] =  ['Flourishing Drills', 'Good Form', 'Accuracy',
                         'Helm-Splitter', 'Infighter']
     char['weapons'] = [['Katana', '2H Sword', 'M', '7(+2c)', '7(+1p)', '7(1)',
