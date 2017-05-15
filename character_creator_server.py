@@ -1,10 +1,12 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore, \
     UserMixin, RoleMixin, login_required, utils, LoginForm, core
 from flask_bootstrap import Bootstrap
 import psycopg2
 import os
+import requests as req
+import json
 
 
 app = Flask(__name__)
@@ -346,6 +348,42 @@ def view_page(id):
     char['armors'] = armors_list
 
     return render_template("char_view_page.html", user=core.current_user, character=char)
+
+@app.route('/api/weapons/?q=<name>', methods=['GET'])
+def get_weapon(name):
+    weapons_list = []
+    weapons = db.session.query(Weapons).filter(Weapons.name.like(name)).all()
+    for weapon in weapons:
+        weapon_list = []
+        weapon_list.append(weapon.name)
+        weapon_list.append(weapon.weapon_type)
+        weapon_list.append(weapon.reach)
+        weapon_list.append(weapon.swing)
+        weapon_list.append(weapon.thrust)
+        weapon_list.append(weapon.defense_guard)
+        weapon_list.append(weapon.special)
+        weapon_list.append(weapon.weight)
+        weapons_list.append(weapon_list)
+    print(weapons_list)
+    return weapons_list
+
+@app.route('/api/armors/?q=<name>',methods=['GET'])
+def get_armor(name):
+    armors_list = []
+    armors = db.session.query(Armours).filter(Armours.name.like(name)).all()
+    for armor in armors:
+        armor_list = []
+        armor_list.append(armor.name)
+        armor_list.append(armor.AVC)
+        armor_list.append(armor.AVP)
+        armor_list.append(armor.AVB)
+        armor_list.append(armor.coverage)
+        armor_list.append(armor.weight)
+        armor_list.append(armor.special)
+        armors_list.append(armor_list)
+
+    return armors_list
+
 
 @app.route('/settings/<email>')
 def settings_page(email):
