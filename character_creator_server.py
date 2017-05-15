@@ -71,7 +71,7 @@ class Characters(db.Model):
     belief = db.Column(db.String(255))
     glory = db.Column(db.String(255))
     flaw = db.Column(db.String(255))
-    bio = db.Column(db.String(255))
+    bio = db.Column(db.String(512))
     STR = db.Column(db.Integer)
     AGI = db.Column(db.Integer)
     END = db.Column(db.Integer)
@@ -155,12 +155,14 @@ class Boons(db.Model):
     __tablename__ = 'boons'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
+    cost = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
 class Banes(db.Model):
     __tablename__ = 'banes'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
+    cost = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
 class Skills(db.Model):
@@ -276,7 +278,7 @@ def view_page(id):
     print(fc.name)
     char = {'name': fc.name, 'age': fc.age, 'race': fc.race,
             'owner': fc.owner, 'social_class': fc.social_class}
-    p_dist = [fc.total_pcp, fc.race_pcp, fc.attributes_pcp, skills_pcp, fc.proficiences_pcp, fc.social_pcp, fc.boons_banes_pcp]
+    p_dist = [fc.total_pcp, fc.race_pcp, fc.attributes_pcp, fc.skills_pcp, fc.proficiences_pcp, fc.social_pcp, fc.boons_banes_pcp]
     char['pcp_dist'] = p_dist
     a = {'sage': fc.sage, 'epic': fc.epic,
          'belief': fc.belief, 'glory': fc.glory,
