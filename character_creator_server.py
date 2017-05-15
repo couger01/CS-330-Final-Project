@@ -114,6 +114,13 @@ class Misc_equipment(db.Model):
     cost = db.Column(db.Integer)
     miscChar = db.relationship("Misc_char")
 
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
+
 class Weapon_char(db.Model):
     __tablename__ = 'weapon_char'
     id = db.Column(db.Integer, primary_key=True)
@@ -364,15 +371,23 @@ def view_page(id):
 @app.route('/api/weapons/<name>', methods=['GET'])
 def get_weapon(name):
     weapons_list = []
-    weapons = db.session.query(Weapons).filter(Weapons.name.like(name.title())).all()
+    weapons = db.session.query(Weapons).filter(Weapons.name.like(name.title() + '%')).all()
+    return json.dumps([weapon.row2dict() for weapon in weapons])
+
+@app.route('/api/weapons', methods=['GET'])
+def get_all_weapons():
+    weapons = db.session.query(Weapons).all()
     return json.dumps([weapon.row2dict() for weapon in weapons])
 
 @app.route('/api/armors/<name>',methods=['GET'])
 def get_armor(name):
-    armors = db.session.query(Armour).filter(Armour.name.like(name.title())).all()
+    armors = db.session.query(Armour).filter(Armour.name.like(name.title()+'%')).all()
     return json.dumps([armor.row2dict() for armor in armors])
 
-
+@app.route('/api/armors',methods=['GET'])
+def get_all_armors():
+    armors = db.session.query(Armour).all()
+    return json.dumps([armor.row2dict() for armor in armors])
 
 @app.route('/settings/<email>')
 def settings_page(email):
