@@ -59,6 +59,13 @@ class Characters(db.Model):
     race = db.Column(db.String(255))
     owner = db.Column(db.String(255))
     social_class = db.Column(db.String(255))
+    total_pcp = db.Column(db.Integer)
+    race_pcp = db.Column(db.Integer)
+    attributes_pcp = db.Column(db.Integer)
+    skills_pcp = db.Column(db.Integer)
+    proficiences_pcp = db.Column(db.Integer)
+    social_pcp = db.Column(db.Integer)
+    boons_banes_pcp = db.Column(db.Integer)
     sage = db.Column(db.String(255))
     epic = db.Column(db.String(255))
     belief = db.Column(db.String(255))
@@ -100,29 +107,49 @@ class Misc_char(db.Model):
 class Misc_equipment(db.Model):
     __tablename__ = 'misc_equipment'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    unit = db.Column(db.String(255))
+    cost = db.Column(db.Integer)
     miscChar = db.relationship("Misc_char")
 
 class Weapon_char(db.Model):
     __tablename__ = 'weapon_char'
     id = db.Column(db.Integer, primary_key=True)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
-    misc_id = db.Column(db.Integer, db.ForeignKey('weapons.id'))
+    weap_id = db.Column(db.Integer, db.ForeignKey('weapons.id'))
 
 class Weapons(db.Model):
     __tablename__ = 'weapons'
     id = db.Column(db.Integer, primary_key=True)
-    miscChar = db.relationship("Weapon_char")
+    name = db.Column(db.String(255))
+    weapon_type = db.Column(db.String(255))
+    reach = db.Column(db.String(1))
+    swing = db.Column(db.String(255))
+    thrust = db.Column(db.String(255))
+    defense_guard = db.Column(db.String(255))
+    special = db.Column(db.String(255))
+    weight = db.Column(db.Integer)
+    cost = db.Column(db.Integer)
+    weapChar = db.relationship("Weapon_char")
 
 class Armour(db.Model):
     __tablename__ = 'armour'
     id = db.Column(db.Integer, primary_key=True)
-    miscChar = db.relationship("Armour_char")
+    name = db.Column(db.String(255))
+    AVC = db.Column(db.Integer)
+    AVP = db.Column(db.Integer)
+    AVB = db.Column(db.Integer)
+    coverage = db.Column(db.String(255))
+    special = db.Column(db.String(255))
+    weight = db.Column(db.Integer)
+    cost = db.Column(db.Integer)
+    armourChar = db.relationship("Armour_char")
 
 class Armour_char(db.Model):
     __tablename__ = 'armour_char'
     id = db.Column(db.Integer, primary_key=True)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
-    misc_id = db.Column(db.Integer, db.ForeignKey('armour.id'))
+    armor_id = db.Column(db.Integer, db.ForeignKey('armour.id'))
 
 class Boons(db.Model):
     __tablename__ = 'boons'
@@ -173,19 +200,32 @@ def create_user():
     db.create_all()
 #     encpassword = utils.encrypt_password('password')
 #     user_datastore.create_user(email='matt@nobien.net', password=encpassword, salt=app.config['SECURITY_PASSWORD_SALT'])
-    # new_character= Characters(user=1,name="Adelaide the Knight",age=28,race='Human',owner="Ashleigh",social_class='Freeman',sage='defeat the dragon king',epic='slay dragons'\
-    # ,belief='dragons are evil',flaw='secretly loves dragons and was pressured into killing them',bio="""A young-ish knight who actually likes dragons
-    # but got forced into fighting them by her family.""",STR=4,AGI=4,END=4,HLT=4,WIL=3,WIT=4,INT=4,PER=4,TOU=4,LUK=3,ADR=4,MOB=6,CAR=8,CHA=5,GRIT=1,\
-    # cp=11,mp=0)
-    # new_character_skill= Skills(name='Athletics',level=6,char=1)
-    # new_character_skill2=Skills(name='Climbing',level=6,char=1)
-    # new_character_boons=Boons(name='Beautiful',char=1)
-    # new_character_boons2=Boons(name='Tall',char=1)
-    # new_character_boons3=Boons(name='Natural Born Killer III',char=1)
-    # new_character_banes=Banes(name='Arrow Magnet',char=1)
-    # new_character_banes2=Banes(name='Honor',char=1)
-    # new_character_school=School(name='Officer',level=7, char=1)
-    # new_character_profs = Profs(name='2H Swords',level=7,char=1)
+    new_character= Characters(user=1,name="Adelaide the Knight",age=28,race='Human',owner="Ashleigh",social_class='Freeman',total_pcp=26,race_pcp=1,attributes_pcp=5,skills_pcp=5,proficiences_pcp=6,social_pcp=4,boons_banes_pcp=5,sage='defeat the dragon king',epic='slay dragons'\
+    ,belief='dragons are evil',flaw='secretly loves dragons and was pressured into killing them',bio="""A young-ish knight who actually likes dragons
+    but got forced into fighting them by her family.""",STR=4,AGI=4,END=4,HLT=4,WIL=3,WIT=4,INT=4,PER=4,TOU=4,LUK=3,ADR=4,MOB=6,CAR=8,CHA=5,GRIT=1,\
+    cp=11,mp=0)
+    new_character_skill= Skills(name='Athletics',level=6,char=1)
+    new_character_skill2=Skills(name='Climbing',level=6,char=1)
+    new_character_boons=Boons(name='Beautiful',char=1)
+    new_character_boons2=Boons(name='Tall',char=1)
+    new_character_boons3=Boons(name='Natural Born Killer III',char=1)
+    new_character_banes=Banes(name='Arrow Magnet',char=1)
+    new_character_banes2=Banes(name='Honor',char=1)
+    new_character_school=School(name='Officer',level=7, char=1)
+    new_character_profs = Profs(name='2H Swords',level=7,char=1)
+    new_character_talent = Talents(name='Flourishing Drills',char=1)
+    new_character_talent2 = Talents(name='Good Form',char=1)
+    new_character_talent3 = Talents(name='Accuracy',char=1)
+    new_character_talent4 = Talents(name='Helm-Splitter',char=1)
+    new_character_talent5 = Talents(name='Infighter',char=1)
+    new_weapon = Weapons(name='Katana',weapon_type='2H Sword',reach='M',\
+    swing='7(+2c)',thrust='7(+1p)',defense_guard='7(1)',\
+    special='Draw 4, Hand-Off, Heavy Weapon',weight=1)
+    new_weapon_conn = Weapon_char(char=1,weap_id=1)
+    new_armor = Armour(name='Stechhelm',AVC=10,AVP=9,AVB=8,coverage='Full Head, Neck',weight=8,special='Hard, Restricts Breathing 3')
+    new_armor2 = Armour(name='Anima Cuirass',AVC=7,AVP=7,AVB=7,coverage='Belly, Chest, Side',weight=3,special='Hard')
+    new_armor_conn = Armour_char(char=1,armor_id=1)
+    new_armor_conn2 = Armour_char(char=1,armor_id=2)
     # db.session.add(new_character)
     # db.session.add(new_character_skill)
     # db.session.add(new_character_skill2)
@@ -196,6 +236,17 @@ def create_user():
     # db.session.add(new_character_banes2)
     # db.session.add(new_character_school)
     # db.session.add(new_character_profs)
+    # db.session.add(new_character_talent)
+    # db.session.add(new_character_talent2)
+    # db.session.add(new_character_talent3)
+    # db.session.add(new_character_talent4)
+    # db.session.add(new_character_talent5)
+    # db.session.add(new_weapon)
+    # db.session.add(new_weapon_conn)
+    # db.session.add(new_armor)
+    # db.session.add(new_armor2)
+    # db.session.add(new_armor_conn)
+    # db.session.add(new_armor_conn2)
     db.session.commit()
 
 @app.route('/')
@@ -210,19 +261,22 @@ def results_page():
            [7, "Anonymous", "Mildred the Surgeon"]]
     return render_template("search_results.html", user=core.current_user, results=res)
 
-@app.route("/view")
-def view_page():
-    fc=db.session.query(Characters).filter(Characters.id == 1).first()
+@app.route("/view/<id>")
+def view_page(id):
+    fc=db.session.query(Characters).filter(Characters.id == id).first()
     fc_skills = db.session.query(Skills).filter(Skills.char == fc.id).all()
     fc_boons = db.session.query(Boons).filter(Boons.char == fc.id).all()
     fc_banes = db.session.query(Banes).filter(Banes.char == fc.id).all()
     fc_schools = db.session.query(School).filter(School.char == fc.id).all()
     fc_profs = db.session.query(Profs).filter(Profs.char == fc.id).all()
+    fc_talents = db.session.query(Talents).filter(Talents.char == fc.id).all()
+    fc_weapons = db.session.query(Weapons).filter(fc.id == Weapon_char.char).filter(Weapon_char.weap_id == Weapons.id).all()
+    fc_armors = db.session.query(Armour).filter(fc.id == Armour_char.char).filter(Armour_char.armor_id == Armour.id).all()
     print(fc_skills[0].name)
     print(fc.name)
     char = {'name': fc.name, 'age': fc.age, 'race': fc.race,
             'owner': fc.owner, 'social_class': fc.social_class}
-    p_dist = [26, 1, 5, 5, 6, 4, 5]
+    p_dist = [fc.total_pcp, fc.race_pcp, fc.attributes_pcp, skills_pcp, fc.proficiences_pcp, fc.social_pcp, fc.boons_banes_pcp]
     char['pcp_dist'] = p_dist
     a = {'sage': fc.sage, 'epic': fc.epic,
          'belief': fc.belief, 'glory': fc.glory,
@@ -258,14 +312,36 @@ def view_page():
         pt = (prof.name,prof.level)
         profs_list.append(pt)
     char['profs'] = profs_list
-    char['talents'] =  ['Flourishing Drills', 'Good Form', 'Accuracy',
-                        'Helm-Splitter', 'Infighter']
-    char['weapons'] = [['Katana', '2H Sword', 'M', '7(+2c)', '7(+1p)', '7(1)',
-                        'Draw 4, Hand-Off, Heavy Weapon', 1]]
-    char['armors'] = [['Stechhelm', 10, 9, 8, 'Full Head, Neck', 8,
-                      'Hard, Restricts Breathing 3'],
-                     ['Anima Cuirass', 7 ,7, 7, 'Belly, Chest, Side', 3, 'Hard']
-                    ]
+    talents_list = []
+    for talent in fc_talents:
+        talents_list.append(talent.name)
+    char['talents'] =  talents_list
+    weapons_list = []
+    for weapon in fc_weapons:
+        weapon_list = []
+        weapon_list.append(weapon.name)
+        weapon_list.append(weapon.weapon_type)
+        weapon_list.append(weapon.reach)
+        weapon_list.append(weapon.swing)
+        weapon_list.append(weapon.thrust)
+        weapon_list.append(weapon.defense_guard)
+        weapon_list.append(weapon.special)
+        weapon_list.append(weapon.weight)
+        weapons_list.append(weapon_list)
+    char['weapons'] = weapons_list
+    armors_list = []
+    for armor in fc_armors:
+        armor_list = []
+        armor_list.append(armor.name)
+        armor_list.append(armor.AVC)
+        armor_list.append(armor.AVP)
+        armor_list.append(armor.AVB)
+        armor_list.append(armor.coverage)
+        armor_list.append(armor.weight)
+        armor_list.append(armor.special)
+        armors_list.append(armor_list)
+
+    char['armors'] = armors_list
 
     return render_template("char_view_page.html", user=core.current_user, character=char)
 
