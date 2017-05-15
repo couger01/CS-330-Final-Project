@@ -134,6 +134,13 @@ class Weapons(db.Model):
     cost = db.Column(db.Integer)
     weapChar = db.relationship("Weapon_char")
 
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
+
 class Armour(db.Model):
     __tablename__ = 'armour'
     id = db.Column(db.Integer, primary_key=True)
@@ -146,6 +153,13 @@ class Armour(db.Model):
     weight = db.Column(db.Integer)
     cost = db.Column(db.Integer)
     armourChar = db.relationship("Armour_char")
+
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
 
 class Armour_char(db.Model):
     __tablename__ = 'armour_char'
@@ -276,8 +290,6 @@ def view_page(id):
     fc_talents = db.session.query(Talents).filter(Talents.char == fc.id).all()
     fc_weapons = db.session.query(Weapons).filter(fc.id == Weapon_char.char).filter(Weapon_char.weap_id == Weapons.id).all()
     fc_armors = db.session.query(Armour).filter(fc.id == Armour_char.char).filter(Armour_char.armor_id == Armour.id).all()
-    print(fc_skills[0].name)
-    print(fc.name)
     char = {'name': fc.name, 'age': fc.age, 'race': fc.race,
             'owner': fc.owner, 'social_class': fc.social_class}
     p_dist = [fc.total_pcp, fc.race_pcp, fc.attributes_pcp, fc.skills_pcp, fc.proficiences_pcp, fc.social_pcp, fc.boons_banes_pcp]
@@ -349,40 +361,17 @@ def view_page(id):
 
     return render_template("char_view_page.html", user=core.current_user, character=char)
 
-@app.route('/api/weapons/?q=<name>', methods=['GET'])
+@app.route('/api/weapons/<name>', methods=['GET'])
 def get_weapon(name):
     weapons_list = []
-    weapons = db.session.query(Weapons).filter(Weapons.name.like(name)).all()
-    for weapon in weapons:
-        weapon_list = []
-        weapon_list.append(weapon.name)
-        weapon_list.append(weapon.weapon_type)
-        weapon_list.append(weapon.reach)
-        weapon_list.append(weapon.swing)
-        weapon_list.append(weapon.thrust)
-        weapon_list.append(weapon.defense_guard)
-        weapon_list.append(weapon.special)
-        weapon_list.append(weapon.weight)
-        weapons_list.append(weapon_list)
-    print(weapons_list)
-    return weapons_list
+    weapons = db.session.query(Weapons).filter(Weapons.name.like(name.title())).all()
+    return json.dumps([weapon.row2dict() for weapon in weapons])
 
-@app.route('/api/armors/?q=<name>',methods=['GET'])
+@app.route('/api/armors/<name>',methods=['GET'])
 def get_armor(name):
-    armors_list = []
-    armors = db.session.query(Armours).filter(Armours.name.like(name)).all()
-    for armor in armors:
-        armor_list = []
-        armor_list.append(armor.name)
-        armor_list.append(armor.AVC)
-        armor_list.append(armor.AVP)
-        armor_list.append(armor.AVB)
-        armor_list.append(armor.coverage)
-        armor_list.append(armor.weight)
-        armor_list.append(armor.special)
-        armors_list.append(armor_list)
+    armors = db.session.query(Armour).filter(Armour.name.like(name.title())).all()
+    return json.dumps([armor.row2dict() for armor in armors])
 
-    return armors_list
 
 
 @app.route('/settings/<email>')
