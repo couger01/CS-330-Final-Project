@@ -614,13 +614,101 @@ Build
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4 class="text-center">Proficiencies</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>PCP Spent</th>
+                                <th>Proficiency Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="pcpSpentProf">1</td>
+                                <td id="ProfPoints">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <div class="form-group">
+                            <label for="schoolSelector">Select School</label>
+                            <select class="form-control" id="schoolSelector">
+                                <option>Scrapper</option>
+                                <option>Soldier</option>
+                                <option>Officer</option>
+                                <option>Noble</option>
+                                <option>Traditional Fencer</option>
+                                <option>Unorthodox Fencer</option>
+                                <option>Esoteric</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default"
+                            onclick="bController.addSchool()" id="sButton">
+                                Add School
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label for="profSelector">
+                                Select Proficiencies
+                            </label>
+                            <select class="form-control" id="profSelector">
+                                <option>Grappling</option>
+                                <option>Pugilism</option>
+                                <option>Dagger</option>
+                                <option>1H Sword</option>
+                                <option>1H Blunt</option>
+                                <option>2H Blunt</option>
+                                <option>2H Sword</option>
+                                <option>Spear</option>
+                                <option>Polearm</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default"
+                            onclick="bController.addProf()" id="pButton">
+                                Add Proficiency
+                            </button>
+                        </div>
+                    </form>
                 </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>School</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schoolTable"></tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Proficiency</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profTable"></tbody>
+                </table>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4 class="text-center">Boons &amp; Banes</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>PCP Spent</th>
+                                <th>Boons/Banes Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="pcpSpentBoon">1</td>
+                                <td id="BoonPoints">-15</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
