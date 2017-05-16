@@ -172,13 +172,13 @@ class Weapons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     weapon_type = db.Column(db.String(255))
-    reach = db.Column(db.String(1))
+    reach = db.Column(db.String(255))
     swing = db.Column(db.String(255))
     thrust = db.Column(db.String(255))
     defense_guard = db.Column(db.String(255))
     special = db.Column(db.String(255))
-    weight = db.Column(db.Integer)
-    cost = db.Column(db.Integer)
+    weight = db.Column(db.String(255))
+    cost = db.Column(db.String(255))
     weapChar = db.relationship("Weapon_char")
 
     def row2dict(self):
@@ -197,8 +197,8 @@ class Armour(db.Model):
     AVB = db.Column(db.Integer)
     coverage = db.Column(db.String(255))
     special = db.Column(db.String(255))
-    weight = db.Column(db.Integer)
-    cost = db.Column(db.Integer)
+    weight = db.Column(db.Float)
+    cost = db.Column(db.String(255))
     armourChar = db.relationship("Armour_char")
 
     def row2dict(self):
@@ -218,7 +218,7 @@ class Boons(db.Model):
     __tablename__ = 'boons'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    cost = db.Column(db.Integer)
+    cost = db.Column(db.String(255))
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
     def row2dict(self):
@@ -234,7 +234,7 @@ class Banes(db.Model):
     __tablename__ = 'banes'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    cost = db.Column(db.Integer)
+    cost = db.Column(db.String(255))
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
     def row2dict(self):
@@ -335,6 +335,20 @@ def create_user():
     new_armor2 = Armour(name='Anima Cuirass',AVC=7,AVP=7,AVB=7,coverage='Belly, Chest, Side',weight=3,special='Hard')
     new_armor_conn = Armour_char(char=1,armor_id=1)
     new_armor_conn2 = Armour_char(char=1,armor_id=2)
+    with open('raw_text_sources/data.json') as datafile:
+        data = json.loads(datafile.read(), encoding='utf-8')
+    print(data['armor'])
+    # for boon in data['boons']:
+    #     db.session.add(Boons(name=boon[0],cost=boon[1]))
+    # for bane in data['banes']:
+    #     db.session.add(Banes(name=bane[0],cost=bane[1]))
+    # for skill in data['skills']:
+    #     db.session.add(Skills(name=skill))
+    # for weapon in data['weapons']:
+    #     db.session.add(Weapons(name=weapon[0],weapon_type=weapon[1],reach=weapon[2],swing=weapon[3],thrust=weapon[4],defense_guard=weapon[5],special=weapon[6],weight=weapon[7],cost=weapon[8]))
+    # for armor in data['armor']:
+    #    db.session.add(Armour(name=armor[0],AVC=int(armor[1]),AVP=int(armor[2]),AVB=int(armor[3]),coverage=armor[4],weight=armor[6],special=armor[5],cost=armor[7]))
+
     # db.session.add(new_character)
     # db.session.add(new_character_skill)
     # db.session.add(new_character_skill2)
@@ -542,6 +556,10 @@ def get_talents(name):
 def get_all_talents():
     talents = db.session.query(Talents).all()
     return json.dumps([talent.row2dict() for talent in talents])
+
+@app.route('/api/save',methods=['POST'])
+def insert():
+    pass
 
 @app.route('/settings/<email>')
 def settings_page(email):
