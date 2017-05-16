@@ -271,6 +271,9 @@ class BuildController {
             newRow.appendChild(sName);
             newRow.appendChild(sLvl);
             document.getElementById('skillTable').appendChild(newRow);
+
+            fSkill = document.getElementById('skill');
+            fSkill.value += skillName + " " + skillLevel + ",";
         }
     }
 
@@ -332,6 +335,8 @@ class BuildController {
                 pLvls[i].innerHTML = sLvl;
             }
             document.getElementById('schoolLevel').innerHTML = sLvl;
+            fSkill = document.getElementById('skill');
+            fSkill.value += Name + " " + skillLevel + ",";
         }
     }
 
@@ -453,6 +458,79 @@ class BuildController {
         newRow.appendChild(aId);
         newRow.appendChild(aName);
         document.getElementById('selArm').appendChild(newRow);
+    }
+
+    popSend() {
+        fName = document.getElementById('name');
+        fAge = document.getElementById('age');
+        fSaga = document.getElementById('saga');
+        fEpic = document.getElementById('epic');
+        fBelief = document.getElementById('belief');
+        fGlory = document.getElementById('glory');
+        fFlaw = document.getElementById('flaw');
+        fpcp_total = document.getElementById('pcp_total');
+        fpcp_race = document.getElementById('pcp_race');
+        fpcp_attr = document.getElementById('pcp_attr');
+        fpcp_skills = document.getElementById('pcp_skills');
+        fpcp_profs = document.getElementById('pcp_profs');
+        fpcp_wealth = document.getElementById('pcp_wealth');
+        fpcp_boons = document.getElementById('pcp_boons');
+        fBio = document.getElementById('bio');
+        fRace = document.getElementById('race');
+        f_STR = document.getElementById('f_STR');
+        f_AGI = document.getElementById('f_AGI');
+        f_END = document.getElementById('f_END');
+        f_HLT = document.getElementById('f_HLT');
+        f_WIL = document.getElementById('f_WIL');
+        f_WIT = document.getElementById('f_WIT');
+        f_INT = document.getElementById('f_INT');
+        f_PER = document.getElementById('f_PER');
+        f_ADR = document.getElementById('f_ADR');
+        f_MOB = document.getElementById('f_MOB');
+        f_CAR = document.getElementById('f_CAR');
+        f_TOU = document.getElementById('f_TOU');
+        f_CHA = document.getElementById('f_CHA');
+        f_GRIT = document.getElementById('f_GRIT');
+        fSkill = document.getElementById('skill');
+        fSchool = document.getElementById('school');
+        fProf = document.getElementById('prof');
+        fWep = document.getElementById('weapons');
+        fArm = document.getElementById('armour');
+
+        fName.value = document.getElementById('charName').value;
+        fAge.value = parseInt(document.getElementById('charAge').value);
+        fSaga.value = document.getElementById('charArcSaga').value;
+        fEpic.value = document.getElementById('charArcEpic').value;
+        fBelief.value = document.getElementById('charArcBelief').value;
+        fGlory.value = document.getElementById('charArcGlory').value;
+        fFlaw.value = document.getElementById('charArcFlaw').value;
+
+        fpcp_total.value = document.getElementById('pcpSelect').value;
+        fpcp_race.value = parseInt(document.getElementById('pcpRace').innerHTML);
+        fpcp_attr.value = parseInt(document.getElementById('pcpAttr').innerHTML);
+        fpcp_skills.value = parseInt(document.getElementById('pcpSkills').innerHTML);
+        fpcp_profs.value = parseInt(document.getElementById('pcpProfs').innerHTML);
+        fpcp_wealth.value = parseInt(document.getElementById('pcpWealth').innerHTML);
+        fpcp_boons.value = parseInt(document.getElementById('pcpBoons').innerHTML);
+
+        fBio.value = document.getElementById('charBio').value;
+        fRace.value = document.getElementById('charRace').value;
+        f_STR.value = parseInt(document.getElementById('STR').innerHTML);
+        f_AGI.value = parseInt(document.getElementById('AGI').innerHTML);
+        f_END.value = parseInt(document.getElementById('END').innerHTML);
+        f_HLT.value = parseInt(document.getElementById('HLT').innerHTML);
+        f_WIL.value = parseInt(document.getElementById('WIL').innerHTML);
+        f_WIT.value = parseInt(document.getElementById('WIT').innerHTML);
+        f_INT.value = parseInt(document.getElementById("INT").innerHTML);
+        f_PER.value = parseInt(document.getElementById('PER').innerHTML);
+        f_ADR.value = parseInt(document.getElementById('ADR').innerHTML);
+        f_MOB.value = parseInt(document.getElementById('MOB').innerHTML);
+        f_CAR.value = parseInt(document.getElementById('CAR').innerHTML);
+        f_TOU.value = parseInt(document.getElementById('TOU').innerHTML);
+        f_CHA.value = parseInt(document.getElementById('CHA').innerHTML);
+        f_GRIT.value = parseInt(document.getElementById('GRIT').innerHTML);
+
+        document.getElementById('finally').submit();
     }
 }
 
