@@ -52,6 +52,8 @@ class BuildController {
     }
 
     pcpAttrUp() {
+        var pcpToPoints = {1: 26, 2: 29, 3: 32, 4: 35, 5: 38, 6: 40, 7: 42,
+                           8: 44, 9: 46, 10: 48};
         let currVal = parseInt(document.getElementById('pcpAttr').innerHTML);
         let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal < 10 && remVal > 0) {
@@ -60,9 +62,18 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpAttr').innerHTML = currVal;
+        let spentPoints = 0;
+        let attrIds = ['STR', 'AGI', 'END', 'HLT', 'WIL', 'WIT', 'INT', 'PER'];
+        for (let aId of attrIds) {
+            spentPoints += parseInt(document.getElementById(aId).innerHTML);
+        }
+        document.getElementById('pcpSpentAttr').innerHTML = currVal;
+        document.getElementById('AttrPoints').innerHTML = pcpToPoints[currVal] - spentPoints;
     }
 
     pcpAttrDn() {
+        var pcpToPoints = {1: 26, 2: 29, 3: 32, 4: 35, 5: 38, 6: 40, 7: 42,
+                           8: 44, 9: 46, 10: 48};
         let currVal = parseInt(document.getElementById('pcpAttr').innerHTML);
         let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal > 1) {
@@ -71,6 +82,13 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpAttr').innerHTML = currVal;
+        let spentPoints = 0;
+        let attrIds = ['STR', 'AGI', 'END', 'HLT', 'WIL', 'WIT', 'INT', 'PER'];
+        for (let aId of attrIds) {
+            spentPoints += parseInt(document.getElementById(aId).innerHTML);
+        }
+        document.getElementById('pcpSpentAttr').innerHTML = currVal;
+        document.getElementById('AttrPoints').innerHTML = pcpToPoints[currVal] - spentPoints;
     }
 
     pcpSkillsUp() {
@@ -177,6 +195,28 @@ class BuildController {
             newOpt.innerHTML = raceOpt;
             selector.appendChild(newOpt);
         }
+    }
+
+    attrUp(attrId) {
+        let remVal = parseInt(document.getElementById('AttrPoints').innerHTML);
+        let currVal = parseInt(document.getElementById(attrId).innerHTML);
+        if (currVal < 10 && remVal > 0) {
+            remVal -= 1;
+            currVal += 1;
+        }
+        document.getElementById('AttrPoints').innerHTML = remVal;
+        document.getElementById(attrId).innerHTML = currVal;
+    }
+
+    attrDn(attrId) {
+        let remVal = parseInt(document.getElementById('AttrPoints').innerHTML);
+        let currVal = parseInt(document.getElementById(attrId).innerHTML);
+        if (currVal > 1) {
+            remVal += 1;
+            currVal -= 1;
+        }
+        document.getElementById('AttrPoints').innerHTML = remVal;
+        document.getElementById(attrId).innerHTML = currVal;
     }
 }
 
