@@ -293,10 +293,11 @@ class BuildForm(FlaskForm):
     TOU = HiddenField("TOU",validators=[DataRequired()])
     CHA = HiddenField("CHA",validators=[DataRequired()])
     GRIT = HiddenField("GRIT",validators=[DataRequired()])
-    skill_level = HiddenField("levelSkill",validators=[DataRequired()])
     skill = HiddenField("skillTable",validators=[DataRequired()])
     school = HiddenField("schoolTable",validators=[DataRequired()])
     prof = HiddenField("profTable",validators=[DataRequired()])
+    weapons = HiddenField("weaponsTable",validators=[DataRequired()])
+    armour = HiddenField("armourTable",validators=[DataRequired()])
 
 
 
@@ -671,6 +672,7 @@ def insert():
     level=school[1],
     char = character.id
     )
+    prof_table = request.form.get('')
     prof_1 = Profs(
     name=request.form.get('proficiency_1'),
     char= character.id
