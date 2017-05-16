@@ -505,10 +505,13 @@ Build
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4 class="text-center">Compound Attributes</h4>
-                    <button type="button" class="btn btn-default"
-                    onclick="bController.calcCompound()">
-                        Calculate
-                    </button>
+                    <div class="center-block">
+                        <button type="button"
+                        class="btn btn-default center-block"
+                        onclick="bController.calcCompound()">
+                            Calculate
+                        </button>
+                    </div>
                 </div>
                 <table class="table">
                     <thead>
@@ -534,7 +537,181 @@ Build
                 </table>
             </div>
         </div>
-        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Skill Selection</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>PCP Spent</th>
+                                <th>Skill Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="pcpSpentSkill">1</td>
+                                <td id="SkillPoints">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <div class="form-group">
+                            <label for="skillSelector" class="sr-only">
+                                Skill Options
+                            </label>
+                            <select class="form-control" id="skillSelector">
+                                <option>Athletics</option>
+                                <option>Climbing</option>
+                                <option>Cooking</option>
+                                <option>Crafting</option>
+                                <option>Engineering</option>
+                                <option>History</option>
+                                <option>Hunting</option>
+                                <option>Intimidate</option>
+                                <option>Navigation</option>
+                                <option>Observation</option>
+                                <option>Orate</option>
+                                <option>Perform</option>
+                                <option>Persuasion</option>
+                                <option>Politics</option>
+                                <option>Research</option>
+                                <option>Riding</option>
+                                <option>Sailing</option>
+                                <option>Stealth</option>
+                                <option>Subterfuge</option>
+                                <option>Surgery</option>
+                                <option>Tactics</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="levelSkill">Desired Level</label>
+                            <input type="text" class="form-control"
+                            id="levelSkill">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default"
+                            onclick="bController.addSkill()">
+                                Add Skill
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Skill</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="skillTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Proficiencies</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>PCP Spent</th>
+                                <th>Proficiency Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="pcpSpentProf">1</td>
+                                <td id="ProfPoints">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <div class="form-group">
+                            <label for="schoolSelector">Select School</label>
+                            <select class="form-control" id="schoolSelector">
+                                <option>Scrapper</option>
+                                <option>Soldier</option>
+                                <option>Officer</option>
+                                <option>Noble</option>
+                                <option>Traditional Fencer</option>
+                                <option>Unorthodox Fencer</option>
+                                <option>Esoteric</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default"
+                            onclick="bController.addSchool()" id="sButton">
+                                Add School
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label for="profSelector">
+                                Select Proficiencies
+                            </label>
+                            <select class="form-control" id="profSelector">
+                                <option>Grappling</option>
+                                <option>Pugilism</option>
+                                <option>Dagger</option>
+                                <option>1H Sword</option>
+                                <option>1H Blunt</option>
+                                <option>2H Blunt</option>
+                                <option>2H Sword</option>
+                                <option>Spear</option>
+                                <option>Polearm</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default"
+                            onclick="bController.addProf()" id="pButton">
+                                Add Proficiency
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>School</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schoolTable"></tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Proficiency</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profTable"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Boons &amp; Banes</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>PCP Spent</th>
+                                <th>Boons/Banes Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="pcpSpentBoon">1</td>
+                                <td id="BoonPoints">-15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -100,6 +100,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpSkills').innerHTML = currVal;
+        document.getElementById('pcpSpentSkill').innerHTML = currVal
+        document.getElementById('SkillPoints'). innerHTML = (currVal - 1) * 3;
     }
 
     pcpSkillsDn() {
@@ -111,6 +113,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpSkills').innerHTML = currVal;
+        document.getElementById('pcpSpentSkill').innerHTML = currVal
+        document.getElementById('SkillPoints'). innerHTML = (currVal - 1) * 3;
     }
 
     pcpProfsUp() {
@@ -122,6 +126,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpProfs').innerHTML = currVal;
+        document.getElementById('pcpSpentProf').innerHTML = currVal
+        document.getElementById('ProfPoints'). innerHTML = (currVal - 1) * 3;
     }
 
     pcpProfsDn() {
@@ -133,6 +139,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpProfs').innerHTML = currVal;
+        document.getElementById('pcpSpentProf').innerHTML = currVal
+        document.getElementById('ProfPoints'). innerHTML = (currVal - 1) * 3;
     }
 
     pcpWealthUp() {
@@ -166,6 +174,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpBoons').innerHTML = currVal;
+        document.getElementById('pcpSpentBoon').innerHTML = currVal
+        document.getElementById('BoonPoints'). innerHTML = (currVal - 4) * 5;
     }
 
     pcpBoonsDn() {
@@ -177,6 +187,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpBoons').innerHTML = currVal;
+        document.getElementById('pcpSpentBoon').innerHTML = currVal
+        document.getElementById('BoonPoints'). innerHTML = (currVal - 4) * 5;
     }
 
     checkRaceOptions() {
@@ -241,6 +253,68 @@ class BuildController {
         document.getElementById('TOU').innerHTML = tou;
         document.getElementById('CHA').innerHTML = cha;
         document.getElementById('GRIT').innerHTML = grit;
+    }
+
+    addSkill() {
+        let skillName = document.getElementById('skillSelector').value;
+        let skillLevel = parseInt(document.getElementById('levelSkill').value);
+        let SkillPoints = parseInt(document.getElementById('SkillPoints').innerHTML);
+        if (skillLevel > SkillPoints) {
+            alert("Desired skill level higher than available skill points");
+        } else {
+            document.getElementById('SkillPoints').innerHTML = SkillPoints - skillLevel;
+            let newRow = document.createElement('tr')
+            let sName = document.createElement('td')
+            let sLvl = document.createElement('td')
+            sName.innerHTML = skillName;
+            sLvl.innerHTML = skillLevel;
+            newRow.appendChild(sName);
+            newRow.appendChild(sLvl);
+            document.getElementById('skillTable').appendChild(newRow);
+        }
+    }
+
+    addSchool() {
+        let school = document.getElementById('schoolSelector').value;
+        let cost = {'Scrapper': 0, 'Soldier': 1, 'Officer': 3, 'Noble': 5,
+                    'Traditional Fencer': 5, 'Unorthodox Fencer': 5,
+                    'Esoteric': 8}
+        let sCost = cost[school];
+        let points = parseInt(document.getElementById('ProfPoints').innerHTML);
+        if (sCost > points) {
+            alert("Desired school too expensive")
+        }else if (document.getElementById('sButton').disabled == "disabled") {
+            alert("There can only be one School")
+        } else {
+            document.getElementById('ProfPoints'). innerHTML = points - sCost;
+            let newRow = document.createElement('tr')
+            let sName = document.createElement('td')
+            let sLvl = document.createElement('td')
+            sName.innerHTML = school;
+            sLvl = 1;
+            newRow.appendChild(sName);
+            newRow.appendChild(sLvl);
+            document.getElementById('schoolTable').appendChild(newRow);
+            document.getElementById('sButton').disabled = "disabled";
+        }
+    }
+
+    addProf() {
+        let prof = document.getElementById('profSelector').value;
+        let points = parseInt(document.getElementById('ProfPoints').innerHTML);
+        if (points < 1) {
+            alert("No more points to spend")
+        } else {
+            document.getElementById('ProfPoints'). innerHTML = points - 1;
+            let newRow = document.createElement('tr')
+            let pName = document.createElement('td')
+            let pLvl = document.createElement('td')
+            pName.innerHTML = school;
+            pLvl = 1;
+            newRow.appendChild(pName);
+            newRow.appendChild(pLvl);
+            document.getElementById('profTable').appendChild(newRow);
+        }
     }
 }
 
