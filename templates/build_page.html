@@ -321,6 +321,212 @@ Build
                     </form>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Attribute Selection</h4>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>PCP Spent</th>
+                            <th>Attribute Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="pcpSpentAttr">1</td>
+                            <td id="AttrPoints">18</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>STR</th>
+                            <th>AGI</th>
+                            <th>END</th>
+                            <th>HLT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Strength">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('STR')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('STR')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="STR">1</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Agility">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('AGI')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('AGI')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="AGI">1</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Endurance">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('END')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('END')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="END">1</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Health">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('HLT')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('HLT')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="HLT">1</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>WIL</th>
+                            <th>WIT</th>
+                            <th>INT</th>
+                            <th>PER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Willpower">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('WIL')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('WIL')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="WIL">1</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Wit">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('WIT')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('WIT')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="WIT">1</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Intelligence">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('INT')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('INT')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="INT">1</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group"
+                                aria-label="Change Perception">
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrUp('PER')">
+                                        +
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-default"
+                                    onclick="bController.attrDn('PER')">
+                                        -
+                                    </button>
+                                </div>
+                                <span id="PER">1</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Compound Attributes</h4>
+                    <button type="button" class="btn btn-default"
+                    onclick="bController.calcCompund()">
+                        Calculate
+                    </button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ADR</th>
+                            <th>MOB</th>
+                            <th>CAR</th>
+                            <th>TOU</th>
+                            <th>CHA</th>
+                            <th>GRIT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="ADR"></td>
+                            <td id="MOB"></td>
+                            <td id="CAR"></td>
+                            <td id="TOU"></td>
+                            <td id="CHA"></td>
+                            <td id="GRIT"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-lg-6"></div>
     </div>
