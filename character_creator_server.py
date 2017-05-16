@@ -279,20 +279,20 @@ class BuildForm(FlaskForm):
     pcp_boons = HiddenField("pcpBoons",validators=[DataRequired()])
     bio = HiddenField("charBio",validators=[DataRequired()])
     race = HiddenField("charRace",validators=[DataRequired()])
-    STR = HiddenField("STR",validators=[DataRequired()])
-    AGI = HiddenField("AGI",validators=[DataRequired()])
-    END = HiddenField("END",validators=[DataRequired()])
-    HLT = HiddenField("HLT",validators=[DataRequired()])
-    WIL = HiddenField("WIL",validators=[DataRequired()])
-    WIT = HiddenField("WIT",validators=[DataRequired()])
-    INT = HiddenField("INT",validators=[DataRequired()])
-    PER = HiddenField("PER",validators=[DataRequired()])
-    ADR = HiddenField("ADR",validators=[DataRequired()])
-    MOB = HiddenField("MOB",validators=[DataRequired()])
-    CAR = HiddenField("CAR",validators=[DataRequired()])
-    TOU = HiddenField("TOU",validators=[DataRequired()])
-    CHA = HiddenField("CHA",validators=[DataRequired()])
-    GRIT = HiddenField("GRIT",validators=[DataRequired()])
+    f_STR = HiddenField("STR",validators=[DataRequired()])
+    f_AGI = HiddenField("AGI",validators=[DataRequired()])
+    f_END = HiddenField("END",validators=[DataRequired()])
+    f_HLT = HiddenField("HLT",validators=[DataRequired()])
+    f_WIL = HiddenField("WIL",validators=[DataRequired()])
+    f_WIT = HiddenField("WIT",validators=[DataRequired()])
+    f_INT = HiddenField("INT",validators=[DataRequired()])
+    f_PER = HiddenField("PER",validators=[DataRequired()])
+    f_ADR = HiddenField("ADR",validators=[DataRequired()])
+    f_MOB = HiddenField("MOB",validators=[DataRequired()])
+    f_CAR = HiddenField("CAR",validators=[DataRequired()])
+    f_TOU = HiddenField("TOU",validators=[DataRequired()])
+    f_CHA = HiddenField("CHA",validators=[DataRequired()])
+    f_GRIT = HiddenField("GRIT",validators=[DataRequired()])
     skill = HiddenField("skillTable",validators=[DataRequired()])
     school = HiddenField("schoolTable",validators=[DataRequired()])
     prof = HiddenField("profTable",validators=[DataRequired()])
@@ -581,15 +581,15 @@ def insert():
     glory=form.glory.data,
     flaw=form.flaw.data,
     bio=form.bio.data,
-    STR=form.STR.data,
-    AGI=form.AGI.data,
-    END=form.END.data,
-    HLT=form.HLT.data,
-    WIL=form.WIL.data,
-    WIT=form.WIT.data,
-    INT=form.INT.data,
-    PER=form.PER.data,
-    TOU=form.TOU.data
+    STR=form.f_STR.data,
+    AGI=form.f_AGI.data,
+    END=form.f_END.data,
+    HLT=form.f_HLT.data,
+    WIL=form.f_WIL.data,
+    WIT=form.f_WIT.data,
+    INT=form.f_INT.data,
+    PER=form.f_PER.data,
+    TOU=form.f_TOU.data
     )
     db.session.add(character)
     skill_table = form.skill.data
