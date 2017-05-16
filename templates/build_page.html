@@ -104,7 +104,7 @@ Build
                                 Saga
                             </label>
                             <div class="col-xs-10">
-                                <input type="text" name="form-control"
+                                <input type="text" class="form-control"
                                 placeholder="Saga Arc" id="charArcSaga">
                             </div>
                         </div>
@@ -114,7 +114,7 @@ Build
                                 Epic
                             </label>
                             <div class="col-xs-10">
-                                <input type="text" name="form-control"
+                                <input type="text" class="form-control"
                                 placeholder="Epic Arc" id="charArcEpic">
                             </div>
                         </div>
@@ -124,7 +124,7 @@ Build
                                 Belief
                             </label>
                             <div class="col-xs-10">
-                                <input type="text" name="form-control"
+                                <input type="text" class="form-control"
                                 placeholder="Belief Arc" id="charArcBelief">
                             </div>
                         </div>
@@ -134,7 +134,7 @@ Build
                                 Glory
                             </label>
                             <div class="col-xs-10">
-                                <input type="text" name="form-control"
+                                <input type="text" class="form-control"
                                 placeholder="Glory Arc" id="charArcGlory">
                             </div>
                         </div>
@@ -144,7 +144,7 @@ Build
                                 Flaw
                             </label>
                             <div class="col-xs-10">
-                                <input type="text" name="form-control"
+                                <input type="text" class="form-control"
                                 placeholder="Flaw Arc" id="charArcFlaw">
                             </div>
                         </div>
@@ -292,7 +292,7 @@ Build
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4 class="text-center">Character Bio</h4>
+                    <h4 class="text-center">Character Biography</h4>
                     <form>
                         <div class="form-group">
                             <label for="charBio" class="sr-only">
@@ -306,6 +306,23 @@ Build
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Race Selection</h4>
+                    <form>
+                        <div class="form-group">
+                            <label for="charRace">Race Selection</label>
+                            <select class="form-control" id="charRace"
+                            onfocus="bController.checkRaceOptions()"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6"></div>
     </div>
 </div>
 {% endblock %}
