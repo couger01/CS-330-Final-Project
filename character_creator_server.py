@@ -298,6 +298,9 @@ class BuildForm(FlaskForm):
     prof = HiddenField("profTable",validators=[DataRequired()])
     weapons = HiddenField("weaponsTable",validators=[DataRequired()])
     armour = HiddenField("armourTable",validators=[DataRequired()])
+    boons = HiddenField("boonTable",validators=[DataRequired()])
+    banes = HiddenField("baneTable", validators=[DataRequired()])
+    talents = HiddenField("talentTable",validators=[DataRequired()])
 
 
 
@@ -560,225 +563,222 @@ def get_all_talents():
 
 @app.route('/save',methods=['POST'])
 def insert():
+    form = BuildForm()
     character = Character(
-    name=request.form.get('name'),
-    age=request.form.get('age'),
-    race=request.form.get('race'),
-    pcp_total=request.form.get('pcp_total'),
-    pcp_race=request.form.get('pcp_race'),
-    pcp_attr=request.form.get('pcp_attr'),
-    pcp_skills=request.form.get('pcp_skills'),
-    pcp_profs=request.form.get('pcp_profs'),
-    pcp_social=request.form.get('pcp_social'),
-    pcp_boons_banes=request.form.get('pcp_boons'),
-    sage=request.form.get('arc_saga'),
-    epic=request.form.get('arc_epic'),
-    belief=request.form.get('arc_belief'),
-    glory=request.form.get('arc_glory'),
-    flaw=request.form.get('arc_flaw'),
-    bio=request.form.get('bio'),
-    STR=request.form.get('STR'),
-    AGI=request.form.get('AGI'),
-    END=request.form.get('END'),
-    HLT=request.form.get('HLT'),
-    WIL=request.form.get('WIL'),
-    WIT=request.form.get('WIT'),
-    INT=request.form.get('INT'),
-    PER=request.form.get('PER'),
-    TOU=request.form.get('TOU')
+    name=form.name.data,
+    age=form.age.data,
+    race=form.race.data,
+    pcp_total=form.pcp_total.data,
+    pcp_race=form.pcp_race.data,
+    pcp_attr=form.pcp_attr.data,
+    pcp_skills=form.pcp_skills.data,
+    pcp_profs=form.pcp_profs.data,
+    pcp_social=form.pcp_social.data,
+    pcp_boons_banes=form.pcp_boons.data,
+    sage=form.saga.data,
+    epic=form.epic.data,
+    belief=form.belief.data,
+    glory=form.glory.data,
+    flaw=form.flaw.data,
+    bio=form.bio.data,
+    STR=form.STR.data,
+    AGI=form.AGI.data,
+    END=form.END.data,
+    HLT=form.HLT.data,
+    WIL=form.WIL.data,
+    WIT=form.WIT.data,
+    INT=form.INT.data,
+    PER=form.PER.data,
+    TOU=form.TOU.data
     )
-    skill_table = request.form.get('skillTable')
+    db.session.add(character)
+    skill_table = form.skill.data
     skills = skill_table.split(',')
     for skill in skills:
         skill_split = skill.split(' ')
         name = skill_split[0]
         level = skill_split[1]
-        new_skill = Skill(name=name,level=level)
+        new_skill = Skill(name=name,level=level,char=character.id)
         db.session.add(new_skill)
     # skill_1 = Skill(
-    # name=request.form.get('skill_1_name'),
-    # level=request.form.get('skill_1_level'),
+    # name=form.get('skill_1_name'),
+    # level=form.get('skill_1_level'),
     # char = character.id
     # )
     # skill_2 = Skill(
-    # name=request.form.get('skill_2_name'),
-    # level=request.form.get('skill_2_level'),
+    # name=form.get('skill_2_name'),
+    # level=form.get('skill_2_level'),
     # char = character.id
     # )
     # skill_3 = Skill(
-    # name=request.form.get('skill_3_name'),
-    # level=request.form.get('skill_3_level'),
+    # name=form.get('skill_3_name'),
+    # level=form.get('skill_3_level'),
     # char = character.id
     # )
     # skill_4 = Skill(
-    # name=request.form.get('skill_4_name'),
-    # level=request.form.get('skill_4_level'),
+    # name=form.get('skill_4_name'),
+    # level=form.get('skill_4_level'),
     # char = character.id
     # )
     # skill_5 = Skill(
-    # name=request.form.get('skill_5_name'),
-    # level=request.form.get('skill_5_level'),
+    # name=form.get('skill_5_name'),
+    # level=form.get('skill_5_level'),
     # char = character.id
     # )
     # skill_6 = Skill(
-    # name=request.form.get('skill_6_name'),
-    # level=request.form.get('skill_6_level'),
+    # name=form.get('skill_6_name'),
+    # level=form.get('skill_6_level'),
     # char = character.id
     # )
-    boon_1 = Boon(
-    name=request.form.get('boon_1_name'),
-    char = character.id
-    )
-    boon_2 = Boon(
-    name=request.form.get('boon_2_name'),
-    char = character.id
-    )
-    boon_3 = Boon(
-    name=request.form.get('boon_3_name'),
-    char = character.id
-    )
-    boon_4 = Boon(
-    name=request.form.get('boon_4_name'),
-    char = character.id
-    )
-    boon_5 = Boon(
-    name=request.form.get('boon_5_name'),
-    char = character.id
-    )
-    bane_1 = Bane(
-    name=request.form.get('bane_1_name'),
-    char = character.id
-    )
-    bane_2 = Bane(
-    name=request.form.get('bane_2_name'),
-    char = character.id
-    )
-    bane_3 = Bane(
-    name=request.form.get('bane_3_name'),
-    char = character.id
-    )
-    bane_4 = Boon(
-    name=request.form.get('bane_4_name'),
-    char = character.id
-    )
-    bane_5 = Boon(
-    name=request.form.get('bane_5_name'),
-    char = character.id
-    )
-    school_table = request.form.get('schoolTable')
+    boon_table = form.boons.data
+    boons = boon_table.split(',')
+    for boon in boons:
+        new_boon = Boon(name=boon,char=character.id)
+        db.session.add(new_boon)
+    # boon_1 = Boon(
+    # name=form.get('boon_1_name'),
+    # char = character.id
+    # )
+    # boon_2 = Boon(
+    # name=form.get('boon_2_name'),
+    # char = character.id
+    # )
+    # boon_3 = Boon(
+    # name=form.get('boon_3_name'),
+    # char = character.id
+    # )
+    # boon_4 = Boon(
+    # name=form.get('boon_4_name'),
+    # char = character.id
+    # )
+    # boon_5 = Boon(
+    # name=form.get('boon_5_name'),
+    # char = character.id
+    # )
+    bane_table = form.banes.data
+    banes = bane_table.split(',')
+    for bane in banes:
+        new_bane = Bane(name=bane,char=character.id)
+        db.session.add(new_bane)
+    # bane_1 = Bane(
+    # name=form.get('bane_1_name'),
+    # char = character.id
+    # )
+    # bane_2 = Bane(
+    # name=form.get('bane_2_name'),
+    # char = character.id
+    # )
+    # bane_3 = Bane(
+    # name=form.get('bane_3_name'),
+    # char = character.id
+    # )
+    # bane_4 = Boon(
+    # name=form.get('bane_4_name'),
+    # char = character.id
+    # )
+    # bane_5 = Boon(
+    # name=form.get('bane_5_name'),
+    # char = character.id
+    # )
+    school_table = form.get('schoolTable')
     school = school_table.split(',')
     school = School(
     name=school[0],
     level=school[1],
     char = character.id
     )
-    prof_table = request.form.get('')
-    prof_1 = Profs(
-    name=request.form.get('proficiency_1'),
-    char= character.id
-    )
-    prof_2 = Profs(
-    name=request.form.get('proficiency_2'),
-    char= character.id
-    )
-    prof_3 = Profs(
-    name=request.form.get('proficiency_3'),
-    char= character.id
-    )
-    talent_1 = Talents(
-    name=request.form.get('talent_1'),
-    char=character.id
-    )
-    talent_2 = Talents(
-    name=request.form.get('talent_2'),
-    char=character.id
-    )
-    talent_3 = Talents(
-    name=request.form.get('talent_3'),
-    char=character.id
-    )
-    talent_4 = Talents(
-    name=request.form.get('talent_4'),
-    char=character.id
-    )
-    talent_5 = Talents(
-    name=request.form.get('talent_5'),
-    char=character.id
-    )
-    weapon_1 = db.session.query(Weapons).filter(Weapons.name == request.form.get('wep_1_name'))
-    weapon_1_char = Weapon_char(
-    char=character.id,
-    weap_id=weapon_1.id
-    )
-    weapon_2 = db.session.query(Weapons).filter(Weapons.name == request.form.get('wep_2_name'))
-    weapon_2_char = Weapon_char(
-    char=character.id,
-    weap_id=weapon_2.id
-    )
-    weapon_3 = db.session.query(Weapons).filter(Weapons.name == request.form.get('wep_3_name'))
-    weapon_3_char = Weapon_char(
-    char=character.id,
-    weap_id=weapon_3.id
-    )
-    armor_1 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_1_name'))
-    armor_1_char = Armour_char(
-    char=character.id,
-    weap_id=armor_1.id
-    )
-    armor_2 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_2_name'))
-    armor_2_char = Armour_char(
-    char=character.id,
-    weap_id=armor_2.id
-    )
-    armor_3 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_3_name'))
-    armor_3_char = Armour_char(
-    char=character.id,
-    weap_id=armor_3.id
-    )
-    armor_4 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_4_name'))
-    armor_4_char = Armour_char(
-    char=character.id,
-    weap_id=armor_4.id
-    )
-    armor_5 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_5_name'))
-    armor_5_char = Armour_char(
-    char=character.id,
-    weap_id=armor_5.id
-    )
-    db.session.add(character)
-    # db.session.add(skill_1)
-    # db.session.add(skill_2)
-    # db.session.add(skill_3)
-    # db.session.add(skill_4)
-    # db.session.add(skill_5)
-    # db.session.add(skill_6)
-    db.session.add(boon_1)
-    db.session.add(boon_2)
-    db.session.add(boon_3)
-    db.session.add(boon_4)
-    db.session.add(boon_5)
-    db.session.add(bane_1)
-    db.session.add(bane_2)
-    db.session.add(bane_3)
-    db.session.add(bane_4)
-    db.session.add(bane_5)
-    db.session.add(school)
-    db.session.add(prof_1)
-    db.session.add(prof_2)
-    db.session.add(prof_3)
-    db.session.add(talent_1)
-    db.session.add(talent_2)
-    db.session.add(talent_3)
-    db.session.add(talent_4)
-    db.session.add(talent_5)
-    db.session.add(weapon_1_char)
-    db.session.add(weapon_2_char)
-    db.session.add(weapon_3_char)
-    db.session.add(armor_1_char)
-    db.session.add(armor_2_char)
-    db.session.add(armor_3_char)
-    db.session.add(armor_4_char)
-    db.session.add(armor_5_char)
+    prof_table = form.prof.data
+    profs = prof_table.split(',')
+    for prof in profs:
+        prof_split = prof.split(' ')
+        name = prof_split[0]
+        level = prof_split[1]
+        new_prof = Profs(name=name,level=level,char=character.id)
+        db.session.add(new_prof)
+    # prof_1 = Profs(
+    # name=form.get('proficiency_1'),
+    # char= character.id
+    # )
+    # prof_2 = Profs(
+    # name=form.get('proficiency_2'),
+    # char= character.id
+    # )
+    # prof_3 = Profs(
+    # name=form.get('proficiency_3'),
+    # char= character.id
+    # )
+    talent_table = form.talents.data
+    talents = talent_table.split(',')
+    for talent in talents:
+        new_talent=Talents(name=talent,char=character.id)
+        db.session.add(new_talent)
+
+    # talent_1 = Talents(
+    # name=form.get('talent_1'),
+    # char=character.id
+    # )
+    # talent_2 = Talents(
+    # name=form.get('talent_2'),
+    # char=character.id
+    # )
+    # talent_3 = Talents(
+    # name=form.get('talent_3'),
+    # char=character.id
+    # )
+    # talent_4 = Talents(
+    # name=form.get('talent_4'),
+    # char=character.id
+    # )
+    # talent_5 = Talents(
+    # name=form.get('talent_5'),
+    # char=character.id
+    # )
+    weapons_ids = form.weapons.data
+    weapons = weapons_ids.split(',')
+    for weapon in weapons
+        weapon_1_char = Weapon_char(
+        char=character.id,
+        weap_id=weapon
+        )
+        db.session.add(weapon_1_char)
+    # weapon_2 = db.session.query(Weapons).filter(Weapons.name == form.get('wep_2_name'))
+    # weapon_2_char = Weapon_char(
+    # char=character.id,
+    # weap_id=weapon_2.id
+    # )
+    # weapon_3 = db.session.query(Weapons).filter(Weapons.name == form.get('wep_3_name'))
+    # weapon_3_char = Weapon_char(
+    # char=character.id,
+    # weap_id=weapon_3.id
+    # )
+    armours_ids = form.armours.data
+    armours = armours_ids.split(',')
+    for armour in armours:
+        armor_1_char = Armour_char(
+        char=character.id,
+        weap_id=armour
+        )
+        db.session.add(armor_1_char)
+    # armor_2 = db.session.query(Armour).filter(Armour.name == form.get('armor_2_name'))
+    # armor_2_char = Armour_char(
+    # char=character.id,
+    # weap_id=armor_2.id
+    # )
+    # armor_3 = db.session.query(Armour).filter(Armour.name == form.get('armor_3_name'))
+    # armor_3_char = Armour_char(
+    # char=character.id,
+    # weap_id=armor_3.id
+    # )
+    # armor_4 = db.session.query(Armour).filter(Armour.name == form.get('armor_4_name'))
+    # armor_4_char = Armour_char(
+    # char=character.id,
+    # weap_id=armor_4.id
+    # )
+    # armor_5 = db.session.query(Armour).filter(Armour.name == form.get('armor_5_name'))
+    # armor_5_char = Armour_char(
+    # char=character.id,
+    # weap_id=armor_5.id
+    # )
     db.session.commit()
 
 
