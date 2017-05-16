@@ -193,7 +193,6 @@ class Boons(db.Model):
         return d
 
 
-
 class Banes(db.Model):
     __tablename__ = 'banes'
     id = db.Column(db.Integer, primary_key=True)
@@ -263,6 +262,38 @@ class Talents(db.Model):
 
         return d
 
+class BuildForm(FlaskForm):
+    name = HiddenField("charName",validators=[DataRequired()])
+    age = HiddenField("charAge",validators=[DataRequired()])
+    saga = HiddenField("charArcSaga",validators=[DataRequired()])
+    epic = HiddenField("charArcEpic",validators=[DataRequired()])
+    belief = HiddenField("charArcBelief",validators=[DataRequired()])
+    glory = HiddenField("charArcGlory",validators=[DataRequired()])
+    flaw = HiddenField("charArcFlaw",validators=[DataRequired()])
+    pcp_total = HiddenField("pcpSelect",validators=[DataRequired()])
+    pcp_race = HiddenField("pcpRace",validators=[DataRequired()])
+    pcp_attr = HiddenField("pcpAttr",validators=[DataRequired()])
+    pcp_skills = HiddenField("pcpSkills",validators=[DataRequired()])
+    pcp_profs = HiddenField("pcpProfs",validators=[DataRequired()])
+    pcp_wealth = HiddenField("pcpWealth",validators=[DataRequired()])
+    pcp_boons = HiddenField("pcpBoons",validators=[DataRequired()])
+    bio = HiddenField("charBio",validators=[DataRequired()])
+    race = HiddenField("charRace",validators=[DataRequired()])
+    STR = HiddenField("STR",validators=[DataRequired()])
+    AGI = HiddenField("AGI",validators=[DataRequired()])
+    END = HiddenField("END",validators=[DataRequired()])
+    HLT = HiddenField("HLT",validators=[DataRequired()])
+    WIL = HiddenField("WIL",validators=[DataRequired()])
+    WIT = HiddenField("WIT",validators=[DataRequired()])
+    INT = HiddenField("INT",validators=[DataRequired()])
+    PER = HiddenField("PER",validators=[DataRequired()])
+    ADR = HiddenField("ADR",validators=[DataRequired()])
+    MOB = HiddenField("MOB",validators=[DataRequired()])
+    CAR = HiddenField("CAR",validators=[DataRequired()])
+    TOU = HiddenField("TOU",validators=[DataRequired()])
+    CHA = HiddenField("CHA",validators=[DataRequired()])
+    GRIT = HiddenField("GRIT",validators=[DataRequired()])
+
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
@@ -301,7 +332,6 @@ def create_user():
     new_armor_conn2 = Armour_char(char=1,armor_id=2)
     with open('raw_text_sources/data.json') as datafile:
         data = json.loads(datafile.read(), encoding='utf-8')
-    print(data['armor'])
     # for boon in data['boons']:
     #     db.session.add(Boons(name=boon[0],cost=boon[1]))
     # for bane in data['banes']:
