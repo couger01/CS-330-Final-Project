@@ -12,6 +12,7 @@ Flask-SQLAlchemy==2.2
 Flask-WTF==0.14.2
 itsdangerous==0.24
 Jinja2==2.9.6
+gunicorn==19.0.0
 MarkupSafe==1.0
 packaging==16.8
 passlib==1.7.1
