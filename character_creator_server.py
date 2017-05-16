@@ -88,7 +88,6 @@ class Characters(db.Model):
     INT = db.Column(db.Integer)
     PER = db.Column(db.Integer)
     TOU = db.Column(db.Integer)
-    LUK = db.Column(db.Integer)
     ADR = db.Column(db.Integer)
     MOB = db.Column(db.Integer)
     CAR = db.Column(db.Integer)
@@ -276,7 +275,7 @@ def create_user():
 #     user_datastore.create_user(email='matt@nobien.net', password=encpassword, salt=app.config['SECURITY_PASSWORD_SALT'])
     new_character= Characters(user=1,name="Adelaide the Knight",age=28,race='Human',owner="Ashleigh",social_class='Freeman',total_pcp=26,race_pcp=1,attributes_pcp=5,skills_pcp=5,proficiences_pcp=6,social_pcp=4,boons_banes_pcp=5,sage='defeat the dragon king',epic='slay dragons'\
     ,belief='dragons are evil',flaw='secretly loves dragons and was pressured into killing them',bio="""A young-ish knight who actually likes dragons
-    but got forced into fighting them by her family.""",STR=4,AGI=4,END=4,HLT=4,WIL=3,WIT=4,INT=4,PER=4,TOU=4,LUK=3,ADR=4,MOB=6,CAR=8,CHA=5,GRIT=1,\
+    but got forced into fighting them by her family.""",STR=4,AGI=4,END=4,HLT=4,WIL=3,WIT=4,INT=4,PER=4,TOU=4,ADR=4,MOB=6,CAR=8,CHA=5,GRIT=1,\
     cp=11,mp=0)
     new_character_skill= Skills(name='Athletics',level=6,char=1)
     new_character_skill2=Skills(name='Climbing',level=6,char=1)
@@ -370,7 +369,7 @@ def view_page(id):
     char['arcs'] = a
     char['bio'] = fc.bio
     attr = {'STR': fc.STR, 'AGI': fc.AGI, 'END': fc.END, 'HLT': fc.HLT, 'WIL': fc.WIL, 'WIT':fc.WIT, 'INT':fc.INT,
-            'PER': fc.PER, 'TOU': fc.TOU, 'LUK': fc.LUK, 'ADR': fc.ADR, 'MOB': fc.MOB, 'CAR': fc.CAR,
+            'PER': fc.PER, 'TOU': fc.TOU, 'ADR': fc.ADR, 'MOB': fc.MOB, 'CAR': fc.CAR,
             'CHA': fc.CHA, 'GRIT': fc.GRIT}
     char['attributes'] = attr
     skills_list = []
@@ -549,8 +548,7 @@ def insert():
     WIT=request.form.get('attr_wit'),
     INT=request.form.get('attr_int'),
     PER=request.form.get('attr_per'),
-    TOU=request.form.get('attr_tou'),
-    LUK=request.form.get('attr_luk')
+    TOU=request.form.get('attr_tou')
     )
     skill_1 = Skill(
     name=request.form.get('skill_1_name'),
