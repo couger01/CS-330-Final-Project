@@ -181,12 +181,28 @@ class Boons(db.Model):
     cost = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
+
+
+
 class Banes(db.Model):
     __tablename__ = 'banes'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     cost = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
 
 class Skills(db.Model):
     __tablename__ = 'skills'
@@ -195,12 +211,26 @@ class Skills(db.Model):
     level = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
+
 class School(db.Model):
     __tablename__ = 'school'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     level = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
 
 class Profs(db.Model):
     __tablename__ = 'profs'
@@ -209,11 +239,25 @@ class Profs(db.Model):
     level = db.Column(db.Integer)
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
+
 class Talents(db.Model):
     __tablename__ = 'talents'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     char = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+    def row2dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+
+        return d
 
 
 
@@ -368,7 +412,7 @@ def view_page(id):
 
     return render_template("char_view_page.html", user=core.current_user, character=char)
 
-@app.route('/api/weapons/<name>', methods=['GET'])
+@app.route('/api/weapons/search/<name>', methods=['GET'])
 def get_weapon(name):
     weapons_list = []
     weapons = db.session.query(Weapons).filter(Weapons.name.like(name.title() + '%')).all()
@@ -379,7 +423,7 @@ def get_all_weapons():
     weapons = db.session.query(Weapons).all()
     return json.dumps([weapon.row2dict() for weapon in weapons])
 
-@app.route('/api/armors/<name>',methods=['GET'])
+@app.route('/api/armors/search/<name>',methods=['GET'])
 def get_armor(name):
     armors = db.session.query(Armour).filter(Armour.name.like(name.title()+'%')).all()
     return json.dumps([armor.row2dict() for armor in armors])
@@ -388,6 +432,76 @@ def get_armor(name):
 def get_all_armors():
     armors = db.session.query(Armour).all()
     return json.dumps([armor.row2dict() for armor in armors])
+
+@app.route('/api/equipment/search/<name>', methods=['GET'])
+def get_equipment(name):
+    equipment = db.session.query(Misc_equipment).filter(Misc_equipment.name.like(name.title()+'%')).all()
+    return json.dumps([piece.row2dict() for piece in equipment])
+
+@app.route('/api/equipment', methods=['GET'])
+def get_equipment():
+    equipment = db.session.query(Misc_equipment).all()
+    return json.dumps([piece.row2dict() for piece in equipment])
+
+@app.route('/api/boons/search/<name>', methods=['GET'])
+def get_equipment(name):
+    boons = db.session.query(Boons).filter(Boons.name.like(name.title()+'%')).all()
+    return json.dumps([boon.row2dict() for boon in boons])
+
+@app.route('/api/boons', methods=['GET'])
+def get_equipment():
+    boons = db.session.query(Boons).all()
+    return json.dumps([boon.row2dict() for boon in boons])
+
+@app.route('/api/banes/search/<name>', methods=['GET'])
+def get_equipment(name):
+    banes = db.session.query(Banes).filter(Banes.name.like(name.title()+'%')).all()
+    return json.dumps([bane.row2dict() for bane in banes])
+
+@app.route('/api/banes', methods=['GET'])
+def get_equipment():
+    banes = db.session.query(Banes).all()
+    return json.dumps([bane.row2dict() for bane in banes])
+
+@app.route('/api/skills/search/<name>', methods=['GET'])
+def get_equipment(name):
+    skills = db.session.query(Skills).filter(Skills.name.like(name.title()+'%')).all()
+    return json.dumps([skill.row2dict() for skill in skills])
+
+@app.route('/api/skills', methods=['GET'])
+def get_equipment():
+    skills = db.session.query(Skills).all()
+    return json.dumps([skill.row2dict() for skill in skills])
+
+@app.route('/api/school/search/<name>', methods=['GET'])
+def get_equipment(name):
+    schools = db.session.query(School).filter(School.name.like(name.title()+'%')).all()
+    return json.dumps([school.row2dict() for school in schools])
+
+@app.route('/api/school', methods=['GET'])
+def get_equipment():
+    schools = db.session.query(School).all()
+    return json.dumps([school.row2dict() for school in schools])
+
+@app.route('/api/profs/search/<name>', methods=['GET'])
+def get_equipment(name):
+    profs = db.session.query(Profs).filter(Profs.name.like(name.title()+'%')).all()
+    return json.dumps([prof.row2dict() for prof in profs])
+
+@app.route('/api/profs', methods=['GET'])
+def get_equipment():
+    profs = db.session.query(Profs).all()
+    return json.dumps([prof.row2dict() for prof in profs])
+
+@app.route('/api/talents/search/<name>', methods=['GET'])
+def get_equipment(name):
+    talents = db.session.query(Talents).filter(Talents.name.like(name.title()+'%')).all()
+    return json.dumps([talent.row2dict() for talent in talents])
+
+@app.route('/api/talents', methods=['GET'])
+def get_equipment():
+    talents = db.session.query(Talents).all()
+    return json.dumps([talent.row2dict() for talent in talents])
 
 @app.route('/settings/<email>')
 def settings_page(email):
