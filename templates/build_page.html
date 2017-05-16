@@ -689,6 +689,15 @@ Build
                     </thead>
                     <tbody id="profTable"></tbody>
                 </table>
+                <form>
+                    <div class="form-group">
+                        <button type="button"
+                        class="btn btn-default form-control"
+                        onclick="bController.profLvlUp()">
+                            Improve School Level
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-lg-6">
@@ -709,7 +718,50 @@ Build
                             </tr>
                         </tbody>
                     </table>
+                    <form>
+                        <div class="form-group">
+                            <label for="bbEntry">Boon or Bane</label>
+                            <input type="text" class="form-control"
+                            id="bbEntry">
+                        </div>
+                        <div class="form-group">
+                            <label for="bbCost">Cost</label>
+                            <input type="text" class="form-control"
+                            id="bbCost">
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" id="boonRad"
+                                value="option1" name="optionsRadios">
+                                Boon
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" id="baneRad"
+                                value="Bane" name="optionsRadios">
+                                Bane
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button type="button"
+                            class="btn btn-default form-control"
+                            onclick="bController.addBB()">
+                                Add Boon/Bane
+                            </button>
+                        </div>
+                    </form>
                 </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Boon/Bane</th>
+                            <th>Name</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bbTable"></tbody>
+                </table>
             </div>
         </div>
     </div>

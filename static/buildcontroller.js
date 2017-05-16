@@ -291,7 +291,8 @@ class BuildController {
             let sName = document.createElement('td')
             let sLvl = document.createElement('td')
             sName.innerHTML = school;
-            sLvl = 1;
+            sLvl.id = "schoolLevel";
+            sLvl.innerHTML = 1;
             newRow.appendChild(sName);
             newRow.appendChild(sLvl);
             document.getElementById('schoolTable').appendChild(newRow);
@@ -309,11 +310,64 @@ class BuildController {
             let newRow = document.createElement('tr')
             let pName = document.createElement('td')
             let pLvl = document.createElement('td')
-            pName.innerHTML = school;
-            pLvl = 1;
+            pLvl.className = "profLevel";
+            pName.innerHTML = prof;
+            pLvl.innerHTML = 1;
             newRow.appendChild(pName);
             newRow.appendChild(pLvl);
             document.getElementById('profTable').appendChild(newRow);
+        }
+    }
+
+    profLvlUp() {
+        let points = parseInt(document.getElementById('ProfPoints').innerHTML);
+        if (points < 1) {
+            alert("No more points to spend")
+        } else {
+            document.getElementById('ProfPoints'). innerHTML = points - 1;
+            let sLvl = parseInt(document.getElementById("schoolLevel").innerHTML);
+            let pLvls = document.getElementsByClassName('profLevel');
+            sLvl += 1;
+            for (let i = 0; i < pLvls.length; i++) {
+                pLvls[i].innerHTML = sLvl;
+            }
+            document.getElementById('schoolLevel').innerHTML = sLvl;
+        }
+    }
+
+    addBB() {
+        let points = parseInt(document.getElementById('BoonPoints').innerHTML);
+        let boon = document.getElementById('boonRad').checked;
+        let bbName = document.getElementById('bbEntry').value;
+        let bbCost = parseInt(document.getElementById('bbCost').value);
+        if (points > bbCost && boon) {
+            document.getElementById('BoonPoints').innerHTML = points - bbCost;
+            let newRow = document.createElement('tr');
+            let bType = document.createElement('td');
+            let bName = document.createElement('td');
+            let bCost = document.createElement('td');
+            bName.innerHTML = bbName;
+            bCost.innerHTML = bbCost;
+            bType.innerHTML = "Boon";
+            newRow.appendChild(bType);
+            newRow.appendChild(bName);
+            newRow.appendChild(bCost);
+            document.getElementById('bbTable').appendChild(newRow)
+        } else if (!boon) {
+            document.getElementById('BoonPoints').innerHTML = points + bbCost;
+            let newRow = document.createElement('tr');
+            let bType = document.createElement('td');
+            let bName = document.createElement('td');
+            let bCost = document.createElement('td');
+            bName.innerHTML = bbName;
+            bCost.innerHTML = bbCost;
+            bType.innerHTML = "Bane";
+            newRow.appendChild(bType);
+            newRow.appendChild(bName);
+            newRow.appendChild(bCost);
+            document.getElementById('bbTable').appendChild(newRow)
+        } else {
+            alert("Insufficient points to cover Boon cost")
         }
     }
 }
