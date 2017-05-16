@@ -735,7 +735,7 @@ def insert():
     # )
     weapons_ids = form.weapons.data
     weapons = weapons_ids.split(',')
-    for weapon in weapons
+    for weapon in weapons:
         weapon_1_char = Weapon_char(
         char=character.id,
         weap_id=weapon
