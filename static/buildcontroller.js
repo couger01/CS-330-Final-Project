@@ -100,6 +100,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpSkills').innerHTML = currVal;
+        document.getElementById('pcpSpentSkill').innerHTML = currVal
+        document.getElementById('SkillPoints'). innerHTML = (currVal - 1) * 3;
     }
 
     pcpSkillsDn() {
@@ -111,6 +113,8 @@ class BuildController {
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpSkills').innerHTML = currVal;
+        document.getElementById('pcpSpentSkill').innerHTML = currVal
+        document.getElementById('SkillPoints'). innerHTML = (currVal - 1) * 3;
     }
 
     pcpProfsUp() {
@@ -241,6 +245,25 @@ class BuildController {
         document.getElementById('TOU').innerHTML = tou;
         document.getElementById('CHA').innerHTML = cha;
         document.getElementById('GRIT').innerHTML = grit;
+    }
+
+    addSkill() {
+        let skillName = document.getElementById('skillSelector').value;
+        let skillLevel = parseInt(document.getElementById('levelSkill').value);
+        let SkillPoints = parseInt(document.getElementById('SkillPoints').innerHTML);
+        if (skillLevel > SkillPoints) {
+            alert("Desired skill level higher than available skill points");
+        } else {
+            document.getElementById('SkillPoints').innerHTML = SkillPoints - skillLevel;
+            let newRow = document.createElement('tr')
+            let sName = document.createElement('td')
+            let sLvl = document.createElement('td')
+            sName.innerHTML = skillName;
+            sLvl.innerHTML = skillLevel;
+            newRow.appendChild(sName);
+            newRow.appendChild(sLvl);
+            document.getElementById('skillTable').appendChild(newRow);
+        }
     }
 }
 
