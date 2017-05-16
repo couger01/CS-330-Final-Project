@@ -370,6 +370,90 @@ class BuildController {
             alert("Insufficient points to cover Boon cost")
         }
     }
+
+    searchWep() {
+        var wepName = document.getElementById('wSearch').value;
+        $.ajax({
+            url: "http://localhost:5000/api/weapons/search/"+wepName,
+            method: "GET"
+        }).done(function(data) {
+            var weps = JSON.parse(data)
+        }).fail(function() {
+            alert("unable to search weapons")
+        });
+        for (let i=0; i < weps.length; i++) {
+            let newRow = document.createElement('tr');
+            let wId = document.createElement('td');
+            let wName = document.createElement('td');
+            let wButt = document.createElement('td');
+            let addButt = document.createElement('button');
+
+            addButt.className = "btn btn-default";
+            addButt.innerHTML = "Add";
+            addButt.type = "button";
+            addButt.onclick = "bController.addWep("+ weps[i].id +weps[i].name+")"
+            wButt.innerHTML = addButt;
+            wName.innerHTML = weps[i].name;
+            wId.innerHTML = weps[i].id;
+            newRow.appendChild(wId);
+            newRow.appendChild(wName);
+            newRow.appendChild(wButt);
+            document.getElementById('wepSearchRes').appendChild(newRow);
+        }
+    }
+
+    searchArm() {
+        var armName = document.getElementById('aSearch').value;
+        $.ajax({
+            url: "http://localhost:5000/api/armor/search/"+armName,
+            method: "GET"
+        }).done(function(data) {
+            var arms = JSON.parse(data)
+        }).fail(function() {
+            alert("unable to search weapons")
+        });
+        for (let i=0; i < arms.length; i++) {
+            let newRow = document.createElement('tr');
+            let aId = document.createElement('td');
+            let aName = document.createElement('td');
+            let aButt = document.createElement('td');
+            let addButt = document.createElement('button');
+
+            addButt.className = "btn btn-default";
+            addButt.innerHTML = "Add";
+            addButt.type = "button";
+            addButt.onclick = "bController.addArm("+ arms[i].id +arms[i].name+")"
+            aButt.innerHTML = addButt;
+            aName.innerHTML = arms[i].name;
+            waId.innerHTML = arms[i].id;
+            newRow.appendChild(aId);
+            newRow.appendChild(aName);
+            newRow.appendChild(aButt);
+            document.getElementById('armSearchRes').appendChild(newRow);
+        }
+    }
+
+    addWep(wepId, wepName) {
+        let newRow = document.createElement('tr');
+        let wId = document.createElement('td');
+        let wName = document.createElement('td');
+        wId.innerHTML = wepId;
+        wName.innerHTML = wepName;
+        newRow.appendChild(wId);
+        newRow.appendChild(wName);
+        document.getElementById('selWep').appendChild(newRow);
+    }
+
+    addWep(armId, armName) {
+        let newRow = document.createElement('tr');
+        let aId = document.createElement('td');
+        let aName = document.createElement('td');
+        aId.innerHTML = armId;
+        aName.innerHTML = armName;
+        newRow.appendChild(aId);
+        newRow.appendChild(aName);
+        document.getElementById('selArm').appendChild(newRow);
+    }
 }
 
 var bController = new BuildController();
