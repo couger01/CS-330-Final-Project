@@ -479,67 +479,67 @@ def get_equipment(name):
     return json.dumps([piece.row2dict() for piece in equipment])
 
 @app.route('/api/equipment', methods=['GET'])
-def get_equipment():
+def get_all_equipment():
     equipment = db.session.query(Misc_equipment).all()
     return json.dumps([piece.row2dict() for piece in equipment])
 
 @app.route('/api/boons/search/<name>', methods=['GET'])
-def get_equipment(name):
+def get_boons(name):
     boons = db.session.query(Boons).filter(Boons.name.like(name.title()+'%')).all()
     return json.dumps([boon.row2dict() for boon in boons])
 
 @app.route('/api/boons', methods=['GET'])
-def get_equipment():
+def get_all_boons():
     boons = db.session.query(Boons).all()
     return json.dumps([boon.row2dict() for boon in boons])
 
 @app.route('/api/banes/search/<name>', methods=['GET'])
-def get_equipment(name):
+def get_banes(name):
     banes = db.session.query(Banes).filter(Banes.name.like(name.title()+'%')).all()
     return json.dumps([bane.row2dict() for bane in banes])
 
 @app.route('/api/banes', methods=['GET'])
-def get_equipment():
+def get_all_banes():
     banes = db.session.query(Banes).all()
     return json.dumps([bane.row2dict() for bane in banes])
 
 @app.route('/api/skills/search/<name>', methods=['GET'])
-def get_equipment(name):
+def get_skills(name):
     skills = db.session.query(Skills).filter(Skills.name.like(name.title()+'%')).all()
     return json.dumps([skill.row2dict() for skill in skills])
 
 @app.route('/api/skills', methods=['GET'])
-def get_equipment():
+def get_all_skills():
     skills = db.session.query(Skills).all()
     return json.dumps([skill.row2dict() for skill in skills])
 
 @app.route('/api/school/search/<name>', methods=['GET'])
-def get_equipment(name):
+def get_school(name):
     schools = db.session.query(School).filter(School.name.like(name.title()+'%')).all()
     return json.dumps([school.row2dict() for school in schools])
 
 @app.route('/api/school', methods=['GET'])
-def get_equipment():
+def get_all_schools():
     schools = db.session.query(School).all()
     return json.dumps([school.row2dict() for school in schools])
 
 @app.route('/api/profs/search/<name>', methods=['GET'])
-def get_equipment(name):
+def get_profs(name):
     profs = db.session.query(Profs).filter(Profs.name.like(name.title()+'%')).all()
     return json.dumps([prof.row2dict() for prof in profs])
 
 @app.route('/api/profs', methods=['GET'])
-def get_equipment():
+def get_all_profs():
     profs = db.session.query(Profs).all()
     return json.dumps([prof.row2dict() for prof in profs])
 
 @app.route('/api/talents/search/<name>', methods=['GET'])
-def get_equipment(name):
+def get_talents(name):
     talents = db.session.query(Talents).filter(Talents.name.like(name.title()+'%')).all()
     return json.dumps([talent.row2dict() for talent in talents])
 
 @app.route('/api/talents', methods=['GET'])
-def get_equipment():
+def get_all_talents():
     talents = db.session.query(Talents).all()
     return json.dumps([talent.row2dict() for talent in talents])
 
