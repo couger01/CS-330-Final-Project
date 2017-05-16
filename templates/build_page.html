@@ -765,6 +765,99 @@ Build
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Weapons</h4>
+                    <form>
+                        <div class="form-group">
+                            <label for="wSearch">Search Weapons</label>
+                            <input type="text" id="wSearch" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button type="button"
+                            class="form-control btn btn-default"
+                            onclick="bController.searchWep()">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="wepSearchRes"></tbody>
+                    </table>
+                </div>
+                <table class="table">
+                    <caption>Selected Weapons</caption>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selWep"></tbody>
+                </table>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Armor</h4>
+                    <form>
+                        <div class="form-group">
+                            <label for="aSearch">Search Armor</label>
+                            <input type="text" id="aSearch" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button type="button"
+                            class="form-control btn btn-default"
+                            onclick="bController.searchArm()">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="armSearchRes"></tbody>
+                    </table>
+                </div>
+                <table class="table">
+                    <caption>Selected Armor</caption>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selArm"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="/save" method="POST">
+                        {{form.hidden_tag()}}
+                        <button type="button" class="btn btn-default"
+                        onclick="bController.popSend()">
+                            Save Character
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
