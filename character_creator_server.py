@@ -5,8 +5,8 @@ from flask_security import Security, SQLAlchemyUserDatastore, \
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SelectField, TextAreaField
-#from wtforms.validators import
-from wtforms import DataRequired, AnyOf
+from wtforms.validators import DataRequired
+from wtforms import AnyOf
 import psycopg2
 import os
 import requests as req
