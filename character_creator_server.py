@@ -517,9 +517,219 @@ def get_all_talents():
     talents = db.session.query(Talents).all()
     return json.dumps([talent.row2dict() for talent in talents])
 
-@app.route('/api/save',methods=['POST'])
+@app.route('/save',methods=['POST'])
 def insert():
-    pass
+    character = Character(
+    name=request.form.get('name'),
+    age=request.form.get('age'),
+    race=request.form.get('race'),
+    pcp_total=request.form.get('pcp_total'),
+    pcp_race=request.form.get('pcp_race'),
+    pcp_attr=request.form.get('pcp_attr'),
+    pcp_skills=request.form.get('pcp_skills'),
+    pcp_profs=request.form.get('pcp_profs'),
+    pcp_social=request.form.get('pcp_social'),
+    pcp_boons_banes=request.form.get('pcp_boons_banes'),
+    sage=request.form.get('arc_saga'),
+    epic=request.form.get('arc_epic'),
+    belief=request.form.get('arc_belief'),
+    glory=request.form.get('arc_glory'),
+    flaw=request.form.get('arc_flaw'),
+    bio=request.form.get('bio'),
+    STR=request.form.get('attr_str'),
+    AGI=request.form.get('attr_agi'),
+    END=request.form.get('attr_end'),
+    HLT=request.form.get('attr_hlt'),
+    WIL=request.form.get('attr_wil'),
+    WIT=request.form.get('attr_wit'),
+    INT=request.form.get('attr_int'),
+    PER=request.form.get('attr_per'),
+    TOU=request.form.get('attr_tou'),
+    LUK=request.form.get('attr_luk')
+    )
+    skill_1 = Skill(
+    name=request.form.get('skill_1_name'),
+    level=request.form.get('skill_1_level'),
+    char = character.id
+    )
+    skill_2 = Skill(
+    name=request.form.get('skill_2_name'),
+    level=request.form.get('skill_2_level'),
+    char = character.id
+    )
+    skill_3 = Skill(
+    name=request.form.get('skill_3_name'),
+    level=request.form.get('skill_3_level'),
+    char = character.id
+    )
+    skill_4 = Skill(
+    name=request.form.get('skill_4_name'),
+    level=request.form.get('skill_4_level'),
+    char = character.id
+    )
+    skill_5 = Skill(
+    name=request.form.get('skill_5_name'),
+    level=request.form.get('skill_5_level'),
+    char = character.id
+    )
+    skill_6 = Skill(
+    name=request.form.get('skill_6_name'),
+    level=request.form.get('skill_6_level'),
+    char = character.id
+    )
+    boon_1 = Boon(
+    name=request.form.get('boon_1_name'),
+    char = character.id
+    )
+    boon_2 = Boon(
+    name=request.form.get('boon_2_name'),
+    char = character.id
+    )
+    boon_3 = Boon(
+    name=request.form.get('boon_3_name'),
+    char = character.id
+    )
+    boon_4 = Boon(
+    name=request.form.get('boon_4_name'),
+    char = character.id
+    )
+    boon_5 = Boon(
+    name=request.form.get('boon_5_name'),
+    char = character.id
+    )
+    bane_1 = Bane(
+    name=request.form.get('bane_1_name'),
+    char = character.id
+    )
+    bane_2 = Bane(
+    name=request.form.get('bane_2_name'),
+    char = character.id
+    )
+    bane_3 = Bane(
+    name=request.form.get('bane_3_name'),
+    char = character.id
+    )
+    bane_4 = Boon(
+    name=request.form.get('bane_4_name'),
+    char = character.id
+    )
+    bane_5 = Boon(
+    name=request.form.get('bane_5_name'),
+    char = character.id
+    )
+    school = School(
+    name=request.form.get('school'),
+    level=request.form.get('school_lvl'),
+    char = character.id
+    )
+    prof_1 = Profs(
+    name=request.form.get('proficiency_1'),
+    char= character.id
+    )
+    prof_2 = Profs(
+    name=request.form.get('proficiency_2'),
+    char= character.id
+    )
+    prof_3 = Profs(
+    name=request.form.get('proficiency_3'),
+    char= character.id
+    )
+    talent_1 = Talents(
+    name=request.form.get('talent_1'),
+    char=character.id
+    )
+    talent_2 = Talents(
+    name=request.form.get('talent_2'),
+    char=character.id
+    )
+    talent_3 = Talents(
+    name=request.form.get('talent_3'),
+    char=character.id
+    )
+    talent_4 = Talents(
+    name=request.form.get('talent_4'),
+    char=character.id
+    )
+    talent_5 = Talents(
+    name=request.form.get('talent_5'),
+    char=character.id
+    )
+    weapon_1 = db.session.query(Weapons).filter(Weapons.name == request.form.get('wep_1_name'))
+    weapon_1_char = Weapon_char(
+    char=character.id,
+    weap_id=weapon_1.id
+    )
+    weapon_2 = db.session.query(Weapons).filter(Weapons.name == request.form.get('wep_2_name'))
+    weapon_2_char = Weapon_char(
+    char=character.id,
+    weap_id=weapon_2.id
+    )
+    weapon_3 = db.session.query(Weapons).filter(Weapons.name == request.form.get('wep_3_name'))
+    weapon_3_char = Weapon_char(
+    char=character.id,
+    weap_id=weapon_3.id
+    )
+    armor_1 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_1_name'))
+    armor_1_char = Armour_char(
+    char=character.id,
+    weap_id=armor_1.id
+    )
+    armor_2 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_2_name'))
+    armor_2_char = Armour_char(
+    char=character.id,
+    weap_id=armor_2.id
+    )
+    armor_3 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_3_name'))
+    armor_3_char = Armour_char(
+    char=character.id,
+    weap_id=armor_3.id
+    )
+    armor_4 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_4_name'))
+    armor_4_char = Armour_char(
+    char=character.id,
+    weap_id=armor_4.id
+    )
+    armor_5 = db.session.query(Armour).filter(Armour.name == request.form.get('armor_5_name'))
+    armor_5_char = Armour_char(
+    char=character.id,
+    weap_id=armor_5.id
+    )
+    db.session.add(character)
+    db.session.add(skill_1)
+    db.session.add(skill_2)
+    db.session.add(skill_3)
+    db.session.add(skill_4)
+    db.session.add(skill_5)
+    db.session.add(skill_6)
+    db.session.add(boon_1)
+    db.session.add(boon_2)
+    db.session.add(boon_3)
+    db.session.add(boon_4)
+    db.session.add(boon_5)
+    db.session.add(bane_1)
+    db.session.add(bane_2)
+    db.session.add(bane_3)
+    db.session.add(bane_4)
+    db.session.add(bane_5)
+    db.session.add(school)
+    db.session.add(prof_1)
+    db.session.add(prof_2)
+    db.session.add(prof_3)
+    db.session.add(talent_1)
+    db.session.add(talent_2)
+    db.session.add(talent_3)
+    db.session.add(talent_4)
+    db.session.add(talent_5)
+    db.session.add(weapon_1_char)
+    db.session.add(weapon_2_char)
+    db.session.add(weapon_3_char)
+    db.session.add(armor_1_char)
+    db.session.add(armor_2_char)
+    db.session.add(armor_3_char)
+    db.session.add(armor_4_char)
+    db.session.add(armor_5_char)
+    db.session.commit()
+
 
 @app.route('/settings/<email>')
 def settings_page(email):
