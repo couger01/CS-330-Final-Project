@@ -30,135 +30,153 @@ class BuildController {
     }
 
     pcpRaceUp() {
-        currVal = parseInt(document.getElementById('pcpRace').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpRace').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal < 8 && remVal > 0) {
-            currVal += 1
-            remVal -= 1
+            currVal += 1;
+            remVal -= 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpRace').innerHTML = currVal;
     }
 
     pcpRaceDn() {
-        currVal = parseInt(document.getElementById('pcpRace').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpRace').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal > 1) {
-            currVal -= 1
-            remVal == 1
+            currVal -= 1;
+            remVal += 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpRace').innerHTML = currVal;
     }
 
     pcpAttrUp() {
-        currVal = parseInt(document.getElementById('pcpAttr').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpAttr').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal < 10 && remVal > 0) {
-            currVal += 1
-            remVal -= 1
+            currVal += 1;
+            remVal -= 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpAttr').innerHTML = currVal;
     }
 
     pcpAttrDn() {
-        currVal = parseInt(document.getElementById('pcpAttr').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpAttr').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal > 1) {
-            currVal -= 1
-            remVal == 1
+            currVal -= 1;
+            remVal += 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpAttr').innerHTML = currVal;
     }
 
     pcpSkillsUp() {
-        currVal = parseInt(document.getElementById('pcpSkills').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpSkills').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal < 10 && remVal > 0) {
-            currVal += 1
-            remVal -= 1
+            currVal += 1;
+            remVal -= 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpSkills').innerHTML = currVal;
     }
 
     pcpSkillsDn() {
-        currVal = parseInt(document.getElementById('pcpSkills').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpSkills').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal > 1) {
-            currVal -= 1
-            remVal == 1
+            currVal -= 1;
+            remVal += 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpSkills').innerHTML = currVal;
     }
 
     pcpProfsUp() {
-        currVal = parseInt(document.getElementById('pcpProfs').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpProfs').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal < 10 && remVal > 0) {
-            currVal += 1
-            remVal -= 1
+            currVal += 1;
+            remVal -= 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpProfs').innerHTML = currVal;
     }
 
     pcpProfsDn() {
-        currVal = parseInt(document.getElementById('pcpProfs').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpProfs').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal > 1) {
-            currVal -= 1
-            remVal == 1
+            currVal -= 1;
+            remVal += 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpProfs').innerHTML = currVal;
     }
 
     pcpWealthUp() {
-        currVal = parseInt(document.getElementById('pcpWealth').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpWealth').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal < 10 && remVal > 0) {
-            currVal += 1
-            remVal -= 1
+            currVal += 1;
+            remVal -= 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpWealth').innerHTML = currVal;
     }
 
     pcpWealthDn() {
-        currVal = parseInt(document.getElementById('pcpWealth').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpWealth').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal > 1) {
-            currVal -= 1
-            remVal == 1
+            currVal -= 1;
+            remVal += 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpWealth').innerHTML = currVal;
     }
 
     pcpBoonsUp() {
-        currVal = parseInt(document.getElementById('pcpBoons').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpBoons').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal < 10 && remVal > 0) {
-            currVal += 1
-            remVal -= 1
+            currVal += 1;
+            remVal -= 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpBoons').innerHTML = currVal;
     }
 
     pcpBoonsDn() {
-        currVal = parseInt(document.getElementById('pcpBoons').innerHTML);
-        remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        let currVal = parseInt(document.getElementById('pcpBoons').innerHTML);
+        let remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
         if (currVal > 1) {
-            currVal -= 1
-            remVal == 1
+            currVal -= 1;
+            remVal += 1;
         }
         document.getElementById('pcpRemain').innerHTML = remVal;
         document.getElementById('pcpBoons').innerHTML = currVal;
+    }
+
+    checkRaceOptions() {
+        var dict = {1:['Human', 'Goblin'], 2:['Dwarf', 'Zell'],
+                    3:'No Associated Races', 4:['Burdinadin', 'Ohanedin'],
+                    5:'No Associated Races', 6:['Orredin'],
+                    7:'No Associated Races',
+                    8:['Sarturi Chosen', 'Genosian Paladin',
+                       'Dessian Silver Guard']};
+        let spentPcp = parseInt(document.getElementById('pcpRace').innerHTML);
+        let availRaces = dict[spentPcp];
+        let selector = document.getElementById('charRace');
+        selector.innerHTML = "";
+        for (let raceOpt of availRaces) {
+            let newOpt = document.createElement('option');
+            newOpt.innerHTML = raceOpt;
+            selector.appendChild(newOpt);
+        }
     }
 }
 
