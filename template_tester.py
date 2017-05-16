@@ -75,5 +75,11 @@ def view_page():
     return render_template("char_view_page.html", user=u, character=char)
 
 
+@app.route("/build")
+def build_page():
+    u = User()
+    return render_template("build_page.html", user=u)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
