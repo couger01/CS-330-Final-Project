@@ -36,11 +36,19 @@ class BuildController {
             currVal += 1
             remVal -= 1
         }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpRace').innerHTML = currVal;
     }
 
     pcpRaceDn() {
         currVal = parseInt(document.getElementById('pcpRace').innerHTML);
         remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        if (currVal > 1) {
+            currVal -= 1
+            remVal == 1
+        }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpRace').innerHTML = currVal;
     }
 
     pcpAttrUp() {
@@ -50,11 +58,19 @@ class BuildController {
             currVal += 1
             remVal -= 1
         }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpAttr').innerHTML = currVal;
     }
 
     pcpAttrDn() {
         currVal = parseInt(document.getElementById('pcpAttr').innerHTML);
         remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        if (currVal > 1) {
+            currVal -= 1
+            remVal == 1
+        }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpAttr').innerHTML = currVal;
     }
 
     pcpSkillsUp() {
@@ -64,11 +80,19 @@ class BuildController {
             currVal += 1
             remVal -= 1
         }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpSkills').innerHTML = currVal;
     }
 
     pcpSkillsDn() {
         currVal = parseInt(document.getElementById('pcpSkills').innerHTML);
         remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        if (currVal > 1) {
+            currVal -= 1
+            remVal == 1
+        }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpSkills').innerHTML = currVal;
     }
 
     pcpProfsUp() {
@@ -78,11 +102,19 @@ class BuildController {
             currVal += 1
             remVal -= 1
         }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpProfs').innerHTML = currVal;
     }
 
     pcpProfsDn() {
         currVal = parseInt(document.getElementById('pcpProfs').innerHTML);
         remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        if (currVal > 1) {
+            currVal -= 1
+            remVal == 1
+        }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpProfs').innerHTML = currVal;
     }
 
     pcpWealthUp() {
@@ -92,11 +124,19 @@ class BuildController {
             currVal += 1
             remVal -= 1
         }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpWealth').innerHTML = currVal;
     }
 
     pcpWealthDn() {
         currVal = parseInt(document.getElementById('pcpWealth').innerHTML);
         remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        if (currVal > 1) {
+            currVal -= 1
+            remVal == 1
+        }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpWealth').innerHTML = currVal;
     }
 
     pcpBoonsUp() {
@@ -106,11 +146,19 @@ class BuildController {
             currVal += 1
             remVal -= 1
         }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpBoons').innerHTML = currVal;
     }
 
     pcpBoonsDn() {
         currVal = parseInt(document.getElementById('pcpBoons').innerHTML);
         remVal = parseInt(document.getElementById('pcpRemain').innerHTML);
+        if (currVal > 1) {
+            currVal -= 1
+            remVal == 1
+        }
+        document.getElementById('pcpRemain').innerHTML = remVal;
+        document.getElementById('pcpBoons').innerHTML = currVal;
     }
 }
 
