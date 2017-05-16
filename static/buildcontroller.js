@@ -218,6 +218,30 @@ class BuildController {
         document.getElementById('AttrPoints').innerHTML = remVal;
         document.getElementById(attrId).innerHTML = currVal;
     }
+
+    calcCompound() {
+        let agi = parseInt(document.getElementById('AGI').innerHTML);
+        let wit = parseInt(document.getElementById('WIT').innerHTML);
+        let str = parseInt(document.getElementById('STR').innerHTML);
+        let end = parseInt(document.getElementById('END').innerHTML);
+        let hlt = parseInt(document.getElementById('HLT').innerHTML);
+        let wil = parseInt(document.getElementById('WIL').innerHTML);
+        let per = parseInt(document.getElementById('PER').innerHTML);
+
+        let adr = Math.floor((agi + wit)/2);
+        let mob = Math.floor((str + agi + end)/2);
+        let car = str + end;
+        let tou = Math.floor((str + end + hlt)/3);
+        let cha = Math.floor((wil + per + wit)/2);
+        let grit = Math.floor(wil/2);
+
+        document.getElementById('ADR').innerHTML = adr;
+        document.getElementById('MOB').innerHTML = mob;
+        document.getElementById('CAR').innerHTML = car;
+        document.getElementById('TOU').innerHTML = tou;
+        document.getElementById('CHA').innerHTML = cha;
+        document.getElementById('GRIT').innerHTML = grit;
+    }
 }
 
 var bController = new BuildController();
