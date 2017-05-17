@@ -15,7 +15,7 @@ import json
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'super-secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URI']
 app.config['SECURITY_PASSWORD_HASH'] = 'sha512_crypt'
 app.config['SECURITY_PASSWORD_SALT'] = 'QuhGFFHFDHhsjjfs'
 app.config['SECURITY_REGISTERABLE'] = True
